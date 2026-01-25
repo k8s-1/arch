@@ -62,21 +62,4 @@ editor   no
 # adding loader
 (NOTE NEEDED) -> Automatic when mkinitcpio generates UKI (unified kernel image)
 
-# sign existing bootloader
-sbctl status
-sbctl create-keys
-<!-- Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI: -->
-sbctl enroll-keys -m -f
-sbctl status
-sbctl verify
 
-# Use the output from sbctl verify to see what needs to be signed
-# EXAMPLE
-sbctl sign -s /boot/vmlinuz-linux
-sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-
-<!-- # test boot with signed loader -->
-<!-- ---> reboot -->
-<!-- ---> go to firmware (F2, DEL, ESC) -->
-<!-- ---> enable secure boot -->
-<!-- ---> leave it in user mode (vs setup, usually automatic) -->

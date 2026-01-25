@@ -141,14 +141,16 @@ sbctl sign -s /boot/vmlinuz-linux
 sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 
-
-
-
-
 # REBOOT
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
 reboot
+<!-- # test boot with signed loader -->
+# enable secure boot
+- go to firmware (F2, DEL, ESC)
+- leave it in user mode (vs setup, usually automatic)
+- also set a firmware admin password
+
 
 # TODO
 Disable hibernate
