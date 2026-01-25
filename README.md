@@ -111,7 +111,7 @@ passwd
 
 
 
-# CONFIGURE BOOTLOADER
+# (!!!) CONFIGURE BOOTLOADER
 
 
 
