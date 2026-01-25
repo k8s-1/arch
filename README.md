@@ -89,6 +89,7 @@ ln -sf /usr/share/zoneinfo/Area/Location /etc/localtime
 
 # Ensure firmware clock matches system clock
 hwclock --systohc
+
 # To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd. 
 
 edit /etc/locale.gen and uncomment the UTF-8 locales you will be using.
