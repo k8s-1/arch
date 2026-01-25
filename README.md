@@ -142,9 +142,14 @@ sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 
 
-# REBOOT into UEFI
+# REBOOT
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
+reboot
+
+# Verify secure boot status:
+bootctl
+
 systemctl reboot --firmware-setup
 <!-- # test boot with signed loader -->
 # enable secure boot
@@ -152,7 +157,10 @@ systemctl reboot --firmware-setup
 - leave it in user mode (vs setup, usually automatic)
 - also set a firmware admin password
 
-`bootctl` to see secure boot status
+
+# ENABLE TPM
+systemd-cryptenroll /dev/root_partition --recovery-key
+systemd-cryptenroll /dev/root_partition --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=000000000000000
 
 
 
