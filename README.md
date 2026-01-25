@@ -161,7 +161,7 @@ systemctl reboot --firmware-setup
 # ENABLE TPM
 systemd-cryptenroll /dev/sda2 --recovery-key
 systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
-# (optional) Add --tpm2-with-pin=yes to require an additional PIN to unlock at boot time.
+# (optional) add --tpm2-with-pin=yes to require an additional PIN to unlock at boot time.
 
 
 The state of PCR 7 can change if firmware certificates change, which can risk locking the user out. This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot keys.
