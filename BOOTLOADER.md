@@ -60,7 +60,7 @@ console-mode max
 editor   no
 
 # adding loader
-Automatic when mkinitcpio generates UKI (unified kernel image)
+(NOTE NEEDED) -> Automatic when mkinitcpio generates UKI (unified kernel image)
 
 # sign existing bootloader
 sbctl status
