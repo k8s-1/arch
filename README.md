@@ -71,10 +71,6 @@ mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
 
 
-
-
-
-
 # Turn on swap
 swapon /dev/swap_partition
 
@@ -110,16 +106,12 @@ oak01
 passwd
 
 
-
-
-
-
-https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition_with_TPM2_and_Secure_Boot
+<!-- https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition_with_TPM2_and_Secure_Boot -->
 # Configure initramfs image
 `/etc/mkinitcpio.conf`
 HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
 
-Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first.
+<!-- Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first. -->
 
 # (!!!) CONFIGURE BOOTLOADER
 
@@ -139,7 +131,6 @@ sbctl verify
 # EXAMPLE
 sbctl sign -s /boot/vmlinuz-linux
 sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-
 
 
 # REBOOT
