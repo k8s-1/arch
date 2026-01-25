@@ -63,18 +63,7 @@ editor   no
 
 
 # adding loader
-`<esp>/loader/entries/arch.conf`
-title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw       <--- blkid /
-
-`<esp>/loader/entries/arch-fallback.conf`
-title   Arch Linux (fallback initramfs)
-linux   /vmlinuz-linux
-initrd  /initramfs-linux-fallback.img
-options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw
-
+Automatic when mkinitcpio generates UKI (unified kernel image)
 
 
 # generate keys
