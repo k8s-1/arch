@@ -59,10 +59,8 @@ timeout  4
 console-mode max
 editor   no
 
-
 # adding loader
 Automatic when mkinitcpio generates UKI (unified kernel image)
-
 
 # sign existing bootloader
 sbctl status
