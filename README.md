@@ -229,6 +229,16 @@ ufw status verbose
 systemctl enable ufw
 systemctl start ufw
 
+# dns
+/etc/systemd/resolved.conf
+```
+[Resolve]
+DNS=1.1.1.1
+FallbackDNS=8.8.8.8
+DNSSEC=yes
+Cache=yes
+```
+
 
 usbguard + IOMMU isolation
 disable UEFI USB boot + firmware password
