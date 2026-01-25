@@ -162,6 +162,11 @@ systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7
 
 
 
+reboot
+
+
+
+
 # CONFIGURE AUTOMATED FIRMWARE UPDATES
 sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
 
