@@ -144,7 +144,7 @@ sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 # REBOOT
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
-reboot
+systemctl reboot --firmware-setup
 <!-- # test boot with signed loader -->
 # enable secure boot
 - go to firmware (F2, DEL, ESC)
