@@ -141,6 +141,7 @@ sbctl sign -s /boot/vmlinuz-linux
 sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 
+
 # REBOOT into UEFI
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
@@ -150,6 +151,9 @@ systemctl reboot --firmware-setup
 - go to firmware (F2, DEL, ESC)
 - leave it in user mode (vs setup, usually automatic)
 - also set a firmware admin password
+
+`bootctl` to see secure boot status
+
 
 
 # TODO
