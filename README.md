@@ -183,12 +183,10 @@ DisableShimForSecureBoot=true
 ```
 sudo systemctl enable --now fwupd.service
 # UPDATE FIRMWARE (!! can cause tpm lockout due to PC7 change)
-```
 fwupdmgr get-devices
 fwupdmgr refresh
 fwupdmgr get-updates
 fwupdmgr update
-```
 # in case of lockout, rebind the tpm key ---> login with recovery key:
 systemd-cryptenroll /dev/root_partition --wipe-slot=auto --tpm2-device=auto --tpm2-pcrs=7+15
 
