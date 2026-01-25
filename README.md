@@ -128,7 +128,6 @@ Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to b
 mkinitcpio -P
 
 # SECURE BOOT
-bootctl
 # sign existing bootloader
 sbctl status
 sbctl create-keys
