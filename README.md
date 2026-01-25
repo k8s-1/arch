@@ -121,7 +121,7 @@ HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block 
 Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first.
 
 
-AFTER installing boot loader:
+AFTER installing boot loader, run this command only when mkinitcpio.conf changes:
 mkinitcpio -P
 
 
