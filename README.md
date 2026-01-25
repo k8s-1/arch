@@ -135,7 +135,6 @@ sbctl create-keys
 sbctl enroll-keys -m -f
 sbctl status
 sbctl verify
-
 # Use the output from sbctl verify to see what needs to be signed
 # EXAMPLE
 sbctl sign -s /boot/vmlinuz-linux
