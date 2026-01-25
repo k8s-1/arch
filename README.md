@@ -211,6 +211,7 @@ systemctl restart systemd-logind
 # More security
 ufw
 usbguard + IOMMU isolation
+disable UEFI USB boot + firmware password
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
