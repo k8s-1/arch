@@ -188,9 +188,10 @@ sudo systemctl enable --now fwupd.service
 
 # to update firmware (!! can cause tpm lockout due to PC7 change)
 ```
-sudo fwupdmgr refresh          # Check for updates
-sudo fwupdmgr get-updates      # See what’s available
-sudo fwupdmgr update           # Apply updates when you’re ready
+fwupdmgr get-devices
+fwupdmgr refresh
+fwupdmgr get-updates
+fwupdmgr update
 ```
 # in case of lockout, rebind the tpm key ---> login with recovery key:
 systemd-cryptenroll /dev/root_partition --wipe-slot=auto --tpm2-device=auto --tpm2-pcrs=7+15
