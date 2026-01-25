@@ -221,7 +221,14 @@ systemctl restart systemd-logind
 
 
 # MORE SECURITY
-ufw
+# ufw
+ufw default deny incoming
+ufw default deny routed
+ufw default allow outgoing
+ufw status verbose
+systemctl enable ufw
+systemctl start ufw
+
 usbguard + IOMMU isolation
 disable UEFI USB boot + firmware password
 lynis (auditing)
