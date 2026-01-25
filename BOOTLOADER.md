@@ -52,7 +52,6 @@ Depends = sh
 NeedsTargets
 ```
 
-
 # configure the loader
 `<esp>/loader/loader.conf` ---> see basic config file at /usr/share/systemd/bootctl/loader.conf
 default  arch.conf
@@ -61,18 +60,17 @@ console-mode max
 editor   no
 
 
-
 # adding loader
 Automatic when mkinitcpio generates UKI (unified kernel image)
 
 
-# generate keys
-pacman -S sbctl efibootmgr
-sbctl create-keys
-
 # sign existing bootloader
 sbctl status
-sbctl sign /boot/efi/EFI/arch/grubx64.efi
+sbctl create-keys
+
+Enroll your keys, with Microsoft's and firmware vendor keys, to the UEFI:
+sbctl enroll-keys -m -f
+
 sbctl verify
 
 # test boot with signed loader
