@@ -110,7 +110,7 @@ LANG=en_US.UTF-8
 yourhostname # 1-64 chars, lowercase, allowed chars: a-z, 0-9, -
 ```
 Good hostnames are generic, unrevealing, and short:
-dev01
+fox01
 brown01
 oak01
 
