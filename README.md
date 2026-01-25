@@ -158,7 +158,23 @@ systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7
 
 # IMPORTANT
 !!!! The state of PCR 7 can change if firmware certificates change, which can risk locking the user out
-!!!! This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot keys
+!!!! This can be implicitly done by firmware update -> fwupd or explicitly by rotating Secure Boot keys
+
+
+
+# CONFIGURE AUTOMATED FIRMWARE UPDATES
+sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
+
+Then after each update of fwupd, the UEFI executable will be automatically signed, thanks to the sbctl pacman hook (/usr/share/libalpm/hooks/zz-sbctl.hook).
+
+Finally, configure /etc/fwupd/fwupd.conf
+
+```
+...
+
+[uefi_capsule]
+DisableShimForSecureBoot=true
+```
 
 
 
