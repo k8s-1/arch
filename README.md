@@ -231,6 +231,9 @@ systemctl start ufw
 
 # dns
 ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+resolvectl status
+
+/etc/systemd/resolved.conf.d/dns_servers.conf
 ```
 [Resolve]
 DNS=1.1.1.1
