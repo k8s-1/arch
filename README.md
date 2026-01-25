@@ -87,7 +87,7 @@ arch-chroot /mnt
 # Set the timezone, adjust as needed (!)
 ln -sf /usr/share/zoneinfo/Area/Location /etc/localtime
 
-# Ensure firmware clock matches system clock
+# Set the Hardware Clock from the System Clock
 hwclock --systohc
 
 # To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd. 
