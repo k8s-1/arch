@@ -210,6 +210,7 @@ systemctl restart systemd-logind
 
 # More security
 ufw
+usbguard
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
