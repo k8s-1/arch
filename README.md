@@ -181,9 +181,7 @@ Finally, configure /etc/fwupd/fwupd.conf
 [uefi_capsule]
 DisableShimForSecureBoot=true
 ```
-
 sudo systemctl enable --now fwupd.service
-
 # UPDATE FIRMWARE (!! can cause tpm lockout due to PC7 change)
 ```
 fwupdmgr get-devices
