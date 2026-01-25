@@ -235,6 +235,7 @@ systemctl start ufw
 [Resolve]
 DNS=1.1.1.1
 FallbackDNS=8.8.8.8
+DNSOverTLS=yes
 DNSSEC=yes
 Cache=yes
 ```
