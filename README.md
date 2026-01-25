@@ -209,6 +209,7 @@ systemctl restart systemd-logind
 
 
 # More security
+ufw
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
