@@ -193,8 +193,16 @@ systemd-cryptenroll /dev/root_partition --wipe-slot=auto --tpm2-device=auto --tp
 
 
 
-# TODO
-Disable hibernate
+# Disable hibernate
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+/etc/systemd/logind.conf
+```
+...
+[Login] 
+HandleLidSwitch=ignore 
+HandleLidSwitchDocked=ignore
+```
 
 
 
