@@ -163,6 +163,9 @@ systemd-cryptenroll /dev/sda2 --recovery-key
 systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 
 
+The state of PCR 7 can change if firmware certificates change, which can risk locking the user out. This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot keys.
+
+
 
 # TODO
 Disable hibernate
