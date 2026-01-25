@@ -127,6 +127,8 @@ Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to b
 <!-- AFTER installing boot loader, create initramfs, there's a pacman hook that runs this on kernel update, but it doesn't when only config is updated: -->
 mkinitcpio -P
 
+# SECURE BOOT
+bootctl
 # sign existing bootloader
 sbctl status
 sbctl create-keys
