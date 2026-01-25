@@ -159,8 +159,8 @@ systemctl reboot --firmware-setup
 
 
 # ENABLE TPM
-systemd-cryptenroll /dev/root_partition --recovery-key
-systemd-cryptenroll /dev/root_partition --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=000000000000000
+systemd-cryptenroll /dev/sda2 --recovery-key
+systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 
 
 
