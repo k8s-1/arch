@@ -84,7 +84,8 @@ pacstrap -K /mnt base linux linux-firmware
 
 arch-chroot /mnt
 
-ln -sf /usr/share/zoneinfo/Area/Location /etc/localtime
+# Set the timezone
+ln -sf /usr/share/zoneinfo/Area/<LOCATION> /etc/localtime
 
 hwclock --systohc #TODO: To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd. 
 
