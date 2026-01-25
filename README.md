@@ -237,4 +237,4 @@ disable ssh
 audit -> https://wiki.archlinux.org/title/Audit_framework
 apparmor (few select profiles for browser, pdf-reader, docker)
 harden systemd services (e.g. docker.d)
-disable root password -> sudo passwd -l root
+disable root login -> sudo passwd -l root
