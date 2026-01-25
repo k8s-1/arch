@@ -184,6 +184,12 @@ DisableShimForSecureBoot=true
 
 sudo systemctl enable --now fwupd.service
 
+# to update firmware:
+sudo fwupdmgr refresh          # Check for updates
+sudo fwupdmgr get-updates      # See what’s available
+sudo fwupdmgr update           # Apply updates when you’re ready
+
+
 
 
 # TODO
