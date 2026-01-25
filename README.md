@@ -111,7 +111,7 @@ yourhostname # 1-64 chars, lowercase, allowed chars: a-z, 0-9, -
 ```
 Good hostnames are generic, unrevealing, and short:
 fox01
-brown01
+green01
 oak01
 
 # Set secure root password
