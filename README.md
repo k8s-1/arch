@@ -91,6 +91,7 @@ ln -sf /usr/share/zoneinfo/Area/Location /etc/localtime
 hwclock --systohc
 
 # To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd. 
+timedatectl set-ntp true
 
 edit /etc/locale.gen and uncomment the UTF-8 locales you will be using.
 Generate the locales:
