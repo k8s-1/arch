@@ -220,7 +220,7 @@ systemctl restart systemd-logind
 
 
 
-# More security
+# MORE SECURITY
 ufw
 usbguard + IOMMU isolation
 disable UEFI USB boot + firmware password
@@ -237,12 +237,14 @@ disable ssh
 audit -> https://wiki.archlinux.org/title/Audit_framework
 apparmor (few select profiles for browser, pdf-reader, docker)
 harden systemd services (e.g. docker.d)
-disable root login -> sudo passwd -l root
 
-configure sudo
+# disable root login
+sudo passwd -l root
+
+# configure sudo
 %wheel ALL=(ALL) ALL
 
-lock other service accounts:
+# lock other service accounts:
 sudo passwd -l nobody ftp git mail systemd-network systemd-timesync systemd-journal dbus avahi lp pulse
 
 
