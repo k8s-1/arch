@@ -168,6 +168,7 @@ reboot
 
 
 # CONFIGURE AUTOMATED FIRMWARE UPDATES
+pacman -S fwupd
 sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
 
 Then after each update of fwupd, the UEFI executable will be automatically signed, thanks to the sbctl pacman hook (/usr/share/libalpm/hooks/zz-sbctl.hook).
