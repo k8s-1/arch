@@ -203,6 +203,7 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 HandleLidSwitch=ignore 
 HandleLidSwitchDocked=ignore
 ```
+systemctl restart systemd-logind
 
 
 
