@@ -167,7 +167,7 @@ reboot
 
 
 
-# CONFIGURE AUTOMATED FIRMWARE UPDATES
+# CONFIGURE FIRMWARE UPDATES
 pacman -S fwupd
 sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
 
@@ -184,9 +184,7 @@ DisableShimForSecureBoot=true
 
 sudo systemctl enable --now fwupd.service
 
-
-
-# to update firmware (!! can cause tpm lockout due to PC7 change)
+# UPDATE FIRMWARE (!! can cause tpm lockout due to PC7 change)
 ```
 fwupdmgr get-devices
 fwupdmgr refresh
