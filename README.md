@@ -159,7 +159,7 @@ systemctl reboot --firmware-setup
 
 
 # ENABLE TPM
-# write down the output, it's a LUKS key slot
+# write down the output, it's a LUKS key slot, keep offline
 systemd-cryptenroll /dev/sda2 --recovery-key
 
 systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
