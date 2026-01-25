@@ -109,7 +109,7 @@ LANG=en_US.UTF-8
 ```
 yourhostname # 1-64 chars, lowercase, allowed chars: a-z, 0-9, -
 ```
-NOTE: good hostnames are generic, unrevealing, and short:
+NOTE: good hostnames are generic, unrevealing, and short (RFC standard):
 fox1
 green2
 chair3
