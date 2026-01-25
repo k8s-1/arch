@@ -229,6 +229,7 @@ ufw status verbose
 systemctl enable ufw
 systemctl start ufw
 
+
 usbguard + IOMMU isolation
 disable UEFI USB boot + firmware password
 lynis (auditing)
