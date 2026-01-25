@@ -243,7 +243,6 @@ configure sudo
 %wheel ALL=(ALL) ALL
 
 lock other service accounts:
-sudo passwd -l git
-sudo passwd -l ftp
-sudo passwd -l nobody
+sudo passwd -l nobody ftp git mail systemd-network systemd-timesync systemd-journal dbus avahi lp pulse
+
 
