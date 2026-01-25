@@ -123,8 +123,22 @@ Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to b
 
 # (!!!) CONFIGURE BOOTLOADER
 
-AFTER installing boot loader, create initramfs, there's a pacman hook that runs this on kernel update, but it doesn't when only config is updated:
+# Generate initramfs
+<!-- AFTER installing boot loader, create initramfs, there's a pacman hook that runs this on kernel update, but it doesn't when only config is updated: -->
 mkinitcpio -P
+
+# sign existing bootloader
+sbctl status
+sbctl create-keys
+<!-- Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI: -->
+sbctl enroll-keys -m -f
+sbctl status
+sbctl verify
+
+# Use the output from sbctl verify to see what needs to be signed
+# EXAMPLE
+sbctl sign -s /boot/vmlinuz-linux
+sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 
 
