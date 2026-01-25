@@ -223,5 +223,5 @@ clamav + chkrootkit/rkhunter + system tray notify
 restrict usb access
 disable ssh
 audit -> https://wiki.archlinux.org/title/Audit_framework
-apparmor (few select profiles for browser, pdf-reader)
+apparmor (few select profiles for browser, pdf-reader, docker)
 harden systemd services (e.g. docker.d)
