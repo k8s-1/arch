@@ -97,7 +97,7 @@ timedatectl status
 # Uncomment the UTF-8 locales you will be using.
 vim /etc/locale.gen
 
-Generate the locales:
+# Generate the locales:
 locale-gen
 
 /etc/locale.conf
