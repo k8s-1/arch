@@ -166,27 +166,9 @@ This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot ke
 Disable hibernate
 
 
-# Security Setup
-Layer	        Choice
-Disk            encryption	LUKS (manual passphrase)
-Swap	        Encrypted, random key
-TPM	            ❌ Not used
-Secure Boot 	✅ Enabled
-Kernel signing	sbctl
-BIOS password	Supervisor/Admin only
-Bootloader      GRUB
-Login	        LUKS password + autologin
-Screen lock	    swaylock + password
-
-This protects against:
-Laptop theft
-Evil-Maid attacks
-Bootloader tampering
 
 
-consider:
-secure grub -> grub password + signed kernels https://www.gnu.org/software/grub/manual/grub/html_node/Using-GPG_002dstyle-digital-signatures.html
-                                              https://www.gnu.org/software/grub/manual/grub/html_node/Using-appended-signatures.html
+# More security
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
