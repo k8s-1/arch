@@ -110,9 +110,9 @@ LANG=en_US.UTF-8
 yourhostname # 1-64 chars, lowercase, allowed chars: a-z, 0-9, -
 ```
 Good hostnames are generic, unrevealing, and short:
-fox01
-green01
-chair01
+fox1
+green1
+chair1
 
 # Set secure root password
 passwd
