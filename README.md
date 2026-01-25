@@ -238,3 +238,12 @@ audit -> https://wiki.archlinux.org/title/Audit_framework
 apparmor (few select profiles for browser, pdf-reader, docker)
 harden systemd services (e.g. docker.d)
 disable root login -> sudo passwd -l root
+
+configure sudo
+%wheel ALL=(ALL) ALL
+
+lock other service accounts:
+sudo passwd -l git
+sudo passwd -l ftp
+sudo passwd -l nobody
+
