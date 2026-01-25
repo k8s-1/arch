@@ -68,7 +68,7 @@ Automatic when mkinitcpio generates UKI (unified kernel image)
 sbctl status
 sbctl create-keys
 
-Enroll your keys, with Microsoft's and firmware vendor keys, to the UEFI:
+Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI:
 sbctl enroll-keys -m -f
 
 sbctl verify
