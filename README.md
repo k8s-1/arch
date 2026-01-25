@@ -159,6 +159,7 @@ systemctl reboot --firmware-setup
 
 
 # ENABLE TPM
+# (optional) Add --tpm2-with-pin=yes to require an additional PIN to unlock at boot time.
 systemd-cryptenroll /dev/sda2 --recovery-key
 systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 
