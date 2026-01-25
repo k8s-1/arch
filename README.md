@@ -182,7 +182,7 @@ Finally, configure /etc/fwupd/fwupd.conf
 DisableShimForSecureBoot=true
 ```
 sudo systemctl enable --now fwupd.service
-# UPDATE FIRMWARE - DO THIS MANUALLY ONCE/YEAR ~ (!! can cause tpm lockout due to PC7 change)
+# UPDATE FIRMWARE - DO THIS MANUALLY ~ 1x / YEAR ~ (!! can cause tpm lockout due to PC7 change)
 fwupdmgr get-devices
 fwupdmgr refresh
 fwupdmgr get-updates
