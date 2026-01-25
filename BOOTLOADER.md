@@ -53,7 +53,6 @@ NeedsTargets
 ```
 
 
-
 # generate keys
 pacman -S sbctl efibootmgr
 sbctl create-keys
