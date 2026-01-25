@@ -81,15 +81,7 @@ sbctl sign -s /boot/vmlinuz-linux
 sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 # test boot with signed loader
----> Reboot + enable Secure Boot.
-
-# enroll keys
-sbctl enroll-keys
-
-# sign everything
-sbctl sign-all
-sbctl verify
-
-# enable Secure Boot
+---> reboot
 ---> go to firmware (F2, DEL, ESC)
+---> enable secure boot
 ---> leave it in user mode (vs setup, usually automatic)
