@@ -94,7 +94,8 @@ hwclock --systohc
 timedatectl set-ntp true
 timedatectl status
 
-edit /etc/locale.gen and uncomment the UTF-8 locales you will be using.
+# Edit /etc/locale.gen and uncomment the UTF-8 locales you will be using.
+
 Generate the locales:
 locale-gen
 
