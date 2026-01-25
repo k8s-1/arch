@@ -69,15 +69,22 @@ mount /dev/mapper/root /mnt
 # cryptsetup open /dev/sda2 root
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
+
+
+
+
+
+
+# Turn on swap
 swapon /dev/swap_partition
 
 # Install base packages
 pacstrap -K /mnt base linux linux-firmware
 
 # Configure system
-mkdir -p /mnt/etc
-genfstab -U /mnt >> /mnt/etc/fstab
-vim /mnt/etc/fstab      -> change swap entry UUID=..... to /dev/mapper/swap
+<!-- mkdir -p /mnt/etc -->
+<!-- genfstab -U /mnt >> /mnt/etc/fstab -->
+<!-- vim /mnt/etc/fstab      -> change swap entry UUID=..... to /dev/mapper/swap -->
 
 arch-chroot /mnt
 

@@ -10,14 +10,14 @@ https://wiki.archlinux.org/title/Systemd-boot
 
 # first, disable "Secure Boot"
 
-Use bootctl to install systemd-boot to the ESP: 
+Use bootctl to install systemd-boot to the <esp>: 
 ```
 arch-chroot -S /mnt     # systemd chroot
 bootctl install
 ```
 
 - The UEFI boot entry will be called "Linux Boot Manager" and will point to \EFI\systemd\systemd-bootx64.efi
-- When running bootctl install, systemd-boot will try to locate the ESP at /efi, /boot, and /boot/efi
+- When running bootctl install, systemd-boot will try to locate the <esp> at /efi, /boot, and /boot/efi
 
 Configure automatic update of systemd boot EFI executable:
 
@@ -51,6 +51,30 @@ Exec = /bin/sh -c 'while read -r f; do sbctl sign -s -o "${f}.signed" "$f"; done
 Depends = sh
 NeedsTargets
 ```
+
+
+# configure the loader
+`<esp>/loader/loader.conf` ---> see basic config file at /usr/share/systemd/bootctl/loader.conf
+default  arch.conf
+timeout  4
+console-mode max
+editor   no
+
+
+
+# adding loader
+`<esp>/loader/entries/arch.conf`
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw       <--- blkid /
+
+`<esp>/loader/entries/arch-fallback.conf`
+title   Arch Linux (fallback initramfs)
+linux   /vmlinuz-linux
+initrd  /initramfs-linux-fallback.img
+options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw
+
 
 
 # generate keys
