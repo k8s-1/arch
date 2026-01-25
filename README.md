@@ -164,7 +164,8 @@ systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7
 # (optional) add --tpm2-with-pin=yes to require an additional PIN to unlock at boot time.
 
 
-The state of PCR 7 can change if firmware certificates change, which can risk locking the user out. This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot keys.
+The state of PCR 7 can change if firmware certificates change, which can risk locking the user out.
+This can be implicitly done by fwupd[2] or explicitly by rotating Secure Boot keys.
 
 
 
