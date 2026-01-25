@@ -67,12 +67,9 @@ Automatic when mkinitcpio generates UKI (unified kernel image)
 # sign existing bootloader
 sbctl status
 sbctl create-keys
-
-Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI:
+<!-- Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI: -->
 sbctl enroll-keys -m -f
-
 sbctl status
-
 sbctl verify
 
 # Use the output from sbctl verify to see what needs to be signed
