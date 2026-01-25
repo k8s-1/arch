@@ -141,7 +141,7 @@ sbctl sign -s /boot/vmlinuz-linux
 sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 
 
-# REBOOT
+# REBOOT into UEFI
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
 systemctl reboot --firmware-setup
