@@ -230,7 +230,7 @@ systemctl enable ufw
 systemctl start ufw
 
 # dns
-/etc/systemd/resolved.conf
+/etc/resolv.conf
 ```
 [Resolve]
 DNS=1.1.1.1
