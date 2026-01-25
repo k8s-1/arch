@@ -92,6 +92,7 @@ hwclock --systohc
 
 # To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd. 
 timedatectl set-ntp true
+timedatectl status
 
 edit /etc/locale.gen and uncomment the UTF-8 locales you will be using.
 Generate the locales:
