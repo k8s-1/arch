@@ -71,10 +71,17 @@ sbctl create-keys
 Enroll your keys, along with Microsoft's and firmware vendor keys, to the UEFI:
 sbctl enroll-keys -m -f
 
+sbctl status
+
 sbctl verify
 
+# Use the output from sbctl verify to see what needs to be signed
+# EXAMPLE
+sbctl sign -s /boot/vmlinuz-linux
+sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
+
 # test boot with signed loader
----> Reboot without enabling Secure Boot.
+---> Reboot + enable Secure Boot.
 
 # enroll keys
 sbctl enroll-keys
