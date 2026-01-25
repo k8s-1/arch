@@ -182,6 +182,8 @@ Finally, configure /etc/fwupd/fwupd.conf
 DisableShimForSecureBoot=true
 ```
 
+sudo systemctl enable --now fwupd.service
+
 
 
 # TODO
