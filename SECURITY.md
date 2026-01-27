@@ -83,7 +83,12 @@ Caveats:
 
 
 
-# disable UEFI USB boot + UEFI password
+# disable UEFI USB boot
+
+
+
+
+# set UEFI admin password
 
 
 
