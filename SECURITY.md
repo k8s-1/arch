@@ -30,14 +30,32 @@ Cache=yes
 ```
 
 
-# usbguard + IOMMU isolation
+# usbguard
+https://wiki.archlinux.org/title/USBGuard
+```
+sudo pacman -S usbguard
+sudo usbguard generate-policy > /etc/usbguard/rules.conf
+sudo systemctl enable usbguard.service
+sudo systemctl start usbguard.service
+```
+This can block btusb controllers, allow bluetooth controllers if needed (see docs).
+
+/etc/usbguard/usbguard-daemon.conf
+```
+RuleFile=/etc/usbguard/rules.conf
+ImplicitPolicyTarget=block
+PresentDevicePolicy=apply-policy
+PresentControllerPolicy=keep
+```
+usbguard list-devices
+
+To temporarily allow a device:
+```
+sudo usbguard allow-device 2
+```
 
 
-
-
-
-
-
+IOMMU isolation
 disable UEFI USB boot + firmware password
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
