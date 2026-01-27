@@ -1,4 +1,5 @@
 # SECURITY
+https://wiki.archlinux.org/title/Security
 
 
 
@@ -108,8 +109,11 @@ umask 0077
 
 
 
-lynis (auditing)
-https://wiki.archlinux.org/title/Security
+# lynis (auditing)
+
+
+
+
 swaylock
 pam
 harden kernel (safe params only)
