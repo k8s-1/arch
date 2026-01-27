@@ -75,9 +75,7 @@ options root=UUID=xxxx rw intel_iommu=on iommu=pt       <--- for intel
 options root=UUID=xxxx rw amd_iommu=on iommu=pt         <--- for amd
 ```
 Reboot and verify:
-```
 dmesg | grep -e DMAR -e IOMMU
-```
 
 
 
