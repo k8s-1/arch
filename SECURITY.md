@@ -68,7 +68,7 @@ allow with-interface equals { 09:*:* }
 
 
 
-# IOMMU isolation blocks DMA attacks
+# IOMMU isolation blocks DMA attacks - Direct Memory Access
 /boot/loader/entries/arch.conf
 ```
 options root=UUID=xxxx rw intel_iommu=on iommu=pt       <--- for intel
