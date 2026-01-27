@@ -69,6 +69,8 @@ allow with-interface equals { 09:*:* }
 
 
 # IOMMU isolation blocks DMA attacks - Direct Memory Access
+IOMMU maps each device to a limited “sandboxed” memory region.
+
 /boot/loader/entries/arch.conf
 ```
 options root=UUID=xxxx rw intel_iommu=on iommu=pt       <--- for intel
