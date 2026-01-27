@@ -30,7 +30,7 @@ Cache=yes
 ```
 
 
-# usbguard
+# usbguard blocks malicious HID
 https://wiki.archlinux.org/title/USBGuard
 ```
 sudo pacman -S usbguard
@@ -68,7 +68,7 @@ allow with-interface equals { 09:*:* }
 
 
 
-# IOMMU isolation
+# IOMMU isolation blocks DMA attacks
 /boot/loader/entries/arch.conf
 ```
 options root=UUID=xxxx rw intel_iommu=on iommu=pt       <--- for intel
@@ -76,6 +76,9 @@ options root=UUID=xxxx rw amd_iommu=on iommu=pt         <--- for amd
 ```
 Reboot and verify:
 dmesg | grep -e DMAR -e IOMMU
+
+Caveats:
+- compatability issues (rare, but possible)
 
 
 
