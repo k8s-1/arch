@@ -47,10 +47,10 @@ ImplicitPolicyTarget=block
 PresentDevicePolicy=apply-policy
 PresentControllerPolicy=keep
 ```
-usbguard list-devices
 
 To temporarily allow a device:
 ```
+usbguard list-devices
 sudo usbguard allow-device 2
 ```
 
