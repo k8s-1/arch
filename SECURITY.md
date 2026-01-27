@@ -40,6 +40,11 @@ sudo systemctl start usbguard.service
 ```
 This can block btusb controllers, allow bluetooth controllers if needed (see docs).
 
+/etc/usbguard/rules.conf    block all HID human interface device e.g. kb, mice, etc...
+```
+block with-interface { 03:*:* }
+```
+
 /etc/usbguard/usbguard-daemon.conf
 ```
 RuleFile=/etc/usbguard/rules.conf
@@ -51,12 +56,26 @@ PresentControllerPolicy=keep
 To temporarily allow a device:
 ```
 usbguard list-devices
-sudo usbguard allow-device 2
+lsusb
+sudo dmesg | grep -i 'authorized'
+sudo usbguard allow-device {device_ID} # add --permanent to write to /etc/usbguard/rules.conf
+```
+
+Allow all monitors:
+```
+allow with-interface equals { 09:*:* }
 ```
 
 
 IOMMU isolation
-disable UEFI USB boot + firmware password
+
+
+
+# disable UEFI USB boot + UEFI password
+
+
+
+
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
