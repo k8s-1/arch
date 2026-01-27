@@ -1,0 +1,65 @@
+# SECURITY
+
+
+
+# ufw
+ufw default deny incoming
+ufw default deny routed
+ufw default allow outgoing
+ufw status verbose
+systemctl enable ufw
+systemctl start ufw
+
+
+
+# dns
+ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+resolvectl status
+
+/etc/systemd/resolved.conf.d/dns_servers.conf
+```
+# Cloudflare DNS (malware + adult content blocking)
+# https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+
+[Resolve]
+DNS=1.1.1.3 2606:4700:4700::1113
+FallbackDNS=1.0.0.3 2606:4700:4700::1003
+DNSOverTLS=yes
+DNSSEC=yes
+Cache=yes
+```
+
+
+# usbguard + IOMMU isolation
+
+
+
+
+
+
+
+disable UEFI USB boot + firmware password
+lynis (auditing)
+https://wiki.archlinux.org/title/Security
+swaylock
+pam
+harden kernel (safe params only)
+umask
+browser security
+clamav + chkrootkit/rkhunter + system tray notify
+restrict usb access
+disable ssh
+audit -> https://wiki.archlinux.org/title/Audit_framework
+apparmor (few select profiles for browser, pdf-reader, docker)
+harden systemd services (e.g. docker.d)
+
+# disable root login
+sudo passwd -l root
+
+# configure sudo
+%wheel ALL=(ALL) ALL
+
+# lock other service accounts:
+sudo passwd -l nobody ftp git mail systemd-network systemd-timesync systemd-journal dbus avahi lp pulse
+
+
