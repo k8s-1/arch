@@ -110,28 +110,57 @@ umask 0077
 
 
 # lynis (auditing)
+https://wiki.archlinux.org/title/Audit_framework
+TODO
+
+
+
+# swaylock
+TODO
 
 
 
 
-swaylock
-pam
-harden kernel (safe params only)
+# pam
+TODO
+
+
+
+
+
+# harden kernel (safe params only)
+TODO
 
 
 
 
 
 
+# browser security
+TODO
 
 
-browser security
-clamav + chkrootkit/rkhunter + system tray notify
-restrict usb access
-disable ssh
-audit -> https://wiki.archlinux.org/title/Audit_framework
-apparmor (few select profiles for browser, pdf-reader, docker)
-harden systemd services (e.g. docker.d)
+
+
+# clamav + chkrootkit/rkhunter + system tray notify
+TODO
+
+
+
+
+# disable ssh
+TODO
+
+
+
+# apparmor (few select profiles for services, browser, pdf-reader, docker)
+TODO
+
+
+
+
+# harden systemd services (e.g. docker.d)
+TODO
 
 
 
