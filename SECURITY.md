@@ -98,12 +98,29 @@ Caveats:
 
 
 
+# umask
+Remove group + others permissions, use 0027 to keep group
+~/.bashrc
+```
+umask 0077
+```
+
+
+
+
 lynis (auditing)
 https://wiki.archlinux.org/title/Security
 swaylock
 pam
 harden kernel (safe params only)
-umask
+
+
+
+
+
+
+
+
 browser security
 clamav + chkrootkit/rkhunter + system tray notify
 restrict usb access
@@ -111,6 +128,9 @@ disable ssh
 audit -> https://wiki.archlinux.org/title/Audit_framework
 apparmor (few select profiles for browser, pdf-reader, docker)
 harden systemd services (e.g. docker.d)
+
+
+
 
 # disable root login
 sudo passwd -l root
