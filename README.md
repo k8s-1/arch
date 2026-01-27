@@ -238,9 +238,12 @@ resolvectl status
 
 /etc/systemd/resolved.conf.d/dns_servers.conf
 ```
+# Cloudflare DNS (malware + adult content blocking)
+# https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+
 [Resolve]
-DNS=1.1.1.1
-FallbackDNS=8.8.8.8
+DNS=1.1.1.3 2606:4700:4700::1113
+FallbackDNS=1.0.0.3 2606:4700:4700::1003
 DNSOverTLS=yes
 DNSSEC=yes
 Cache=yes
