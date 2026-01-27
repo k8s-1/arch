@@ -220,6 +220,9 @@ systemctl restart systemd-logind
 
 
 
+
+
+
 # MORE SECURITY
 # ufw
 ufw default deny incoming
