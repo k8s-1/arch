@@ -71,7 +71,7 @@ allow with-interface equals { 09:*:* }
 # IOMMU isolation blocks DMA attacks - Direct Memory Access
 IOMMU maps each device to a limited “sandboxed” memory region.
 
-Configured at bootloader options. First check the vendor:
+Configured at bootloader options. First check the CPU vendor:
 grep -i "vendor_id" /proc/cpuinfo
 
 /boot/loader/entries/arch.conf
