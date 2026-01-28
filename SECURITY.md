@@ -109,7 +109,12 @@ umask 0077
 
 
 
-# lynis (auditing)
+# auditd
+TODO
+
+
+
+# lynis auditing
 https://wiki.archlinux.org/title/Audit_framework
 TODO
 
