@@ -128,7 +128,7 @@ sudo lynis show report
 
 
 # swaylock
-TODO
+TODO - trigger via sway shortcut
 
 
 
