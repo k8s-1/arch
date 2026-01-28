@@ -187,7 +187,21 @@ TODO
 
 
 # disable ssh
-TODO
+Disable the service:
+```
+sudo systemctl stop sshd.service
+sudo systemctl disable sshd.service
+sudo systemctl mask sshd.service
+```
+
+Disable via config to be sure:
+/etc/ssh/ssh_config
+```
+DenyUsers *
+PasswordAuthentication no
+PermitRootLogin no
+```
+
 
 
 
