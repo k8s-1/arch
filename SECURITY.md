@@ -194,7 +194,7 @@ sudo systemctl disable sshd.service
 sudo systemctl mask sshd.service
 ```
 
-Disable via config to be sure:
+Additionally disable via config:
 /etc/ssh/ssh_config
 ```
 DenyUsers *
