@@ -3,6 +3,12 @@ https://wiki.archlinux.org/title/Security
 
 
 
+# configure sudo
+TODO https://wiki.archlinux.org/title/Sudo
+
+
+
+
 # ufw
 ufw default deny incoming
 ufw default deny routed
@@ -137,8 +143,29 @@ TODO https://wiki.archlinux.org/title/Sway#Idle
 # pam
 The pam package is a dependency of the base meta package and, thereby, normally installed on an Arch system. The PAM modules are installed into /usr/lib/security exclusively. 
 
-TODO https://wiki.archlinux.org/title/Security#Lock_out_user_after_three_failed_login_attempts
-TODO https://wiki.archlinux.org/title/Security#Allow_only_certain_users
+# pam lock on failed login attempts https://wiki.archlinux.org/title/Security#Lock_out_user_after_three_failed_login_attempts
+
+to unlock after failed attempts:
+```
+faillock --user username --reset
+```
+
+configure: /etc/security/faillock.conf
+```
+deny=4                  # limited tries
+unlock_time=3600        # 1h lock
+even_deny_root=true     # root is already locked with passwd --lock root, extra measure
+fail_interval=900       # only count failures within 15 min
+dir=/var/lib/faillock   # persist reboots
+```
+
+
+
+# pam allow only certain users to login with su https://wiki.archlinux.org/title/Security#Allow_only_certain_users
+Uncomment the appropriate line in /etc/pam.d/su and /etc/pam.d/su-l
+```
+auth required pam_wheel.so use_uid
+```
 
 
 
@@ -218,7 +245,7 @@ TODO
 
 
 # disable root login
-sudo passwd -l root
+sudo passwd --lock root
 
 # configure sudo
 %wheel ALL=(ALL) ALL
