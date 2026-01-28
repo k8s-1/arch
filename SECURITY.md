@@ -116,7 +116,14 @@ TODO
 
 
 # lynis auditing
-TODO
+Repeat this audit regularly to check how the system can be improved.
+Don't try to fix everything at once and test changes (especially kernel parameters).
+Turn off unused services.
+```
+sudo pacman -S lynis
+sudo lynis audit system
+sudo lynis show report
+```
 
 
 
