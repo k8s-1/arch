@@ -178,6 +178,10 @@ Then add them to /etc/audit/rules.d/example.rules:
 
 # Audit login attempts (successful and failed) via PAM (Pluggable Authentication Modules)
 -a always,exit -F arch=b64 -S execve -F exe=/usr/bin/login
+
+# Audit use of sudo (successful and failed)
+-a always,exit -F arch=b64 -S execve -F exe=/usr/bin/sudo
+-a always,exit -F arch=b32 -S execve -F exe=/usr/bin/sudo
 ```
 
 Audit ownership changes:
