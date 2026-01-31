@@ -221,7 +221,7 @@ sudo lynis show report
 
 
 
-# swaylock + swayidle
+# swaylock
 pacman -S swaylock
 
 https://wiki.archlinux.org/title/Sway#Custom_keybindings
