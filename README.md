@@ -55,7 +55,7 @@ mount /dev/mapper/root /mnt
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
 
-# Encrypt swap with ephemeral key - (!) ensure hibernate is disabled
+# Encrypt swap with ephemeral key - (!) ensure hibernate is disabled -> this setup does not support hibernate
 ## https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#UUID_and_LABEL
 We first create a small label to identify the swap partition:
 mkfs.ext2 -L cryptswap /dev/swap_partition 1M
