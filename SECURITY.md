@@ -8,7 +8,9 @@ https://wiki.archlinux.org/title/Sudo
 visudo
 sudo -ll
 
-usermod -aG wheel username
+useradd -m -G wheel -s /bin/bash username
+passwd username
+groups username
 
 /etc/sudoers.d/10-wheel
 %wheel      ALL=(ALL:ALL) ALL
