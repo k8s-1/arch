@@ -45,6 +45,9 @@ blkid /dev/swap_partition
 /etc/crypttab
 # <name> <device>         <password>    <options>
 swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
+/etc/fstab
+# <filesystem>    <dir>  <type>  <options>  <dump>  <pass>
+/dev/mapper/swap  none   swap    defaults   0       0
 
 # Encrypt root
 ## https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition
