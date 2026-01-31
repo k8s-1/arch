@@ -178,6 +178,14 @@ Then add them to /etc/audit/rules.d/example.rules:
 # Audit changes to systemd service configurations
 -a always,exit -F arch=b64 -F dir=/etc/systemd/system
 -a always,exit -F arch=b32 -F dir=/etc/systemd/system
+
+# Audit changes to init scripts or systemd services
+-a always,exit -F arch=b64 -F dir=/etc/init.d/
+-a always,exit -F arch=b32 -F dir=/etc/init.d/
+
+# Audit login attempts (successful and failed) via PAM (Pluggable Authentication Modules)
+-a always,exit -F arch=b64 -S execve -F exe=/usr/bin/login
+-a always,exit -F arch=b32 -S execve -F exe=/usr/bin/login
 ```
 
 Audit ownership changes:
