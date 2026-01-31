@@ -129,7 +129,57 @@ umask 0077
 
 # auditd
 https://wiki.archlinux.org/title/Audit_framework
-TODO
+
+add kernel param:
+audit=1
+
+Start/enable auditd.service
+
+WARNING: Before adding rules, you must know that the audit framework can be very verbose and that each rule must be carefully tested before being effectively deployed. Indeed, just one rule can flood all your logs within a few minutes.
+
+List active rules:
+auditctl -l
+
+Validate rules:
+auditctl -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+auditctl -a always,exit -F arch=b32 -F path=/etc/passwd -F perm=rwxa
+auditctl -a always,exit -F arch=b64 -F dir=/etc/security
+auditctl -a always,exit -F arch=b32 -F dir=/etc/security
+
+Then add them to /etc/audit/rules.d/example.rules:
+```
+-a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+-a always,exit -F arch=b32 -F path=/etc/passwd -F perm=rwxa
+-a always,exit -F arch=b64 -F dir=/etc/security
+-a always,exit -F arch=b32 -F dir=/etc/security
+```
+
+Audit ownership changes:
+auditctl -a exit,always -S chmod
+
+/etc/audit/rules.d/quiet.rules
+```
+-a exclude,always -F msgtype=SERVICE_START
+-a exclude,always -F msgtype=SERVICE_STOP
+-a exclude,always -F msgtype=BPF
+-a exclude,always -F exe=/usr/bin/sudo
+```
+
+
+Remember to verify changes (fix as necessary) and regenerate /etc/audit/audit.rules as follows:
+augenrules --check
+augenrules --load
+
+
+Check anomalies:
+aureport -n
+
+
+Rotate the logs - send SIGUSR1 to the audit daemon:
+pkill -USR1 -x auditd
+And adjust as needed /etc/audit/auditd.conf
+
+
 
 
 
