@@ -6,7 +6,6 @@ https://wiki.archlinux.org/title/Dm-crypt/Specialties#Securing_the_unencrypted_b
 cryptsetup erase /dev/sda      # remove LUKS headers
 wipefs -a /dev/sda             # remove filesystem/partition metadata
 
-
 # ROOT PARITION
 
 # encrypt luks device
