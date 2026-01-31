@@ -15,7 +15,7 @@ LUKS password -> autologin + swaylock if needed
 
 # Partition
 fdisk -l
-## Delete partition tables and labels
+## Delete existing partition tables and labels
 cryptsetup erase /dev/sdX      # remove LUKS headers
 wipefs -a /dev/sdX             # remove filesystem/partition metadata
 
