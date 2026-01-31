@@ -148,7 +148,10 @@ auditctl -a always,exit -F arch=b32 -F dir=/etc/security
 
 Then add them to /etc/audit/rules.d/example.rules:
 ```
+# Audit changes to users
 -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+
+# Audit changes to security settings
 -a always,exit -F arch=b64 -F dir=/etc/security
 
 # Monitor changes to /etc/sudoers (used for sudo privileges)
