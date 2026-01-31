@@ -3,7 +3,7 @@ https://wiki.archlinux.org/title/Security
 
 
 
-# configure sudo
+# configure sudo or use doas?
 TODO https://wiki.archlinux.org/title/Sudo
 
 
