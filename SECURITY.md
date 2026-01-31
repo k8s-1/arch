@@ -207,7 +207,39 @@ root        hard    nice       -20         # Allows root to run a process at min
 
 
 # harden kernel (safe params only)
-TODO
+/etc/sysctl.d/99-hardening.conf:
+```
+# NOTE: Any settings here can break the system.
+
+# Disable ICMP echo (aka ping) requests: 
+net.ipv4.icmp_echo_ignore_all = 1
+net.ipv6.icmp.echo_ignore_all = 1
+
+# Disable ICMP redirects
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+
+# Reverse path filtering (1=strict, 2=loose), the kernel will do source validation of the packets received from all the interfaces on the machine
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+# Protect kernel pointers from unprivileged users
+kernel.kptr_restrict = 1
+
+# Restrict ptrace to own processes (prevents process snooping)
+kernel.yama.ptrace_scope = 1
+
+# Filesystem
+fs.suid_dumpable = 0
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_fifos = 2
+fs.protected_regular = 2
+```
 
 
 
