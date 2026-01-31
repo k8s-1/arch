@@ -517,3 +517,13 @@ sudo passwd --lock root
 sudo passwd -l nobody ftp git mail systemd-network systemd-timesync systemd-journal dbus avahi lp pulse
 
 
+
+
+
+
+
+
+# how do you arch-chroot into encrypted disk?
+TODO
+
+
