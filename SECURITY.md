@@ -222,8 +222,8 @@ sudo lynis show report
 
 
 # swaylock + swayidle
+https://wiki.archlinux.org/title/Sway#Idle
 TODO - trigger via sway shortcut
-TODO https://wiki.archlinux.org/title/Sway#Idle
 
 
 
