@@ -469,7 +469,11 @@ NOTE: Currently the tools do not properly utilize variables such as @{PROC},
 and @{HOME}, so you may want to adjust the profile after to use
 abstractions that the tools could not discover.
 
-add rules with aa-logprof or set it back with aa-complain
+inject more rules with:
+aa-logprof
+
+or set it back with:
+aa-complain
 
 
 ## to configure notifications on apparmor deny:
