@@ -41,7 +41,6 @@ fdisk -l
 mkfs.ext2 -L cryptswap /dev/swap_partition 1M
 blkid /dev/swap_partition
 
-(we configure the fstab entry for this at a later point):
 /etc/crypttab
 # <name> <device>         <password>    <options>
 swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
