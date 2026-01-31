@@ -286,6 +286,10 @@ sudo pacman -Qk
 
 
 
+# other checks [add to maintenance.sh]
+systemctl --failed
+
+
 
 
 # chkrootkit/rkhunter + system tray notify
