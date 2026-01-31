@@ -205,6 +205,7 @@ TODO
 TODO
 - noscript
 - ublock origin
+- config...
 
 
 
