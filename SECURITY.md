@@ -297,9 +297,6 @@ TODO
 
 
 
-# lograte
-
-
 
 # disable ssh
 Disable the service:
