@@ -226,7 +226,7 @@ pacman -S swaylock
 
 https://wiki.archlinux.org/title/Sway#Custom_keybindings
 
-~/.config/sway/config
+~/.config/sway/config - configure shortcut
 ```
 bindsym $mod+l exec swaylock
 ```
