@@ -171,35 +171,6 @@ exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
 reboot
 
-# Verify secure boot status:
-bootctl
-
-systemctl reboot --firmware-setup
-<!-- # test boot with signed loader -->
-# enable secure boot
-- go to firmware (F2, DEL, ESC)
-- leave it in user mode (vs setup, usually automatic)
-- also set a firmware admin password
-
-
-# ENABLE TPM
-# recovery key --- write down the output, it's a LUKS key slot to decrypt the disk if TPM fails (though if it happens, ask why first), keep offline and safe
-systemd-cryptenroll /dev/sda2 --recovery-key
-
-systemd-cryptenroll /dev/sda2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
-# (optional) add --tpm2-with-pin=yes to require an additional PIN to unlock at boot time.
-
-# IMPORTANT
-!!!! The state of PCR 7 can change if firmware certificates change, which can risk locking the user out
-!!!! This can be implicitly done by firmware update -> fwupd or explicitly by rotating Secure Boot keys
-
-
-
-reboot
-
-
-
-
 # CONFIGURE FIRMWARE UPDATES
 pacman -S fwupd
 sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
