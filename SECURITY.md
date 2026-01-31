@@ -471,7 +471,7 @@ modify profile from logs:
 aa-logprof
 
 or set it back with:
-aa-complain
+aa-complain <path to executable>
 
 
 ## to configure notifications on apparmor deny:
