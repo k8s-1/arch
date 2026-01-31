@@ -467,7 +467,7 @@ NOTE: Currently the tools do not properly utilize variables such as @{PROC},
 and @{HOME}, so you may want to adjust the profile after to use
 abstractions that the tools could not discover.
 
-inject more rules with:
+modify profile from logs:
 aa-logprof
 
 or set it back with:
