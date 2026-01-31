@@ -110,12 +110,9 @@ Caveats:
 
 
 
-# disable UEFI USB boot
-
-
-
-
-# set UEFI admin password
+# secure UEFI
+- disable USB boot
+- set admin password
 
 
 
