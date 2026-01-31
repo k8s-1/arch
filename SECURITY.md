@@ -439,7 +439,7 @@ PermitRootLogin no
 
 
 
-# apparmor (few select profiles for services, browser, pdf-reader, docker)
+# apparmor (few select profiles for services, browser, pdf-reader, docker) = MAC mandatory access control (even applies to root user)
 https://wiki.archlinux.org/title/AppArmor
 
 pacman -S apparmor
@@ -487,6 +487,16 @@ NoDisplay=true
 
 Reboot and check if the aa-notify process is running:
 $ pgrep -ax aa-notify
+
+
+## speed up apparmor boot
+systemd-analyze blame | grep apparmor
+
+To enable caching AppArmor profiles, uncomment:
+/etc/apparmor/parser.conf
+## Turn creating/updating of the cache on by default
+write-cache
+
 
 
 
