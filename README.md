@@ -13,7 +13,6 @@ LUKS password -> autologin + swaylock if needed
 # Launch instaler
 # Connect to WiFi with `iwctl` if needed
 
-
 # Partition
 fdisk -l
 ## Overwrite existing data
