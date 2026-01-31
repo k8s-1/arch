@@ -243,6 +243,7 @@ TODO
 
 # harden systemd services (e.g. docker.d)
 systemd-analzye security
+https://wiki.archlinux.org/title/Systemd/Sandboxing
 
 
 
