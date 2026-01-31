@@ -152,6 +152,32 @@ Then add them to /etc/audit/rules.d/example.rules:
 -a always,exit -F arch=b32 -F path=/etc/passwd -F perm=rwxa
 -a always,exit -F arch=b64 -F dir=/etc/security
 -a always,exit -F arch=b32 -F dir=/etc/security
+
+# Monitor changes to /etc/sudoers (used for sudo privileges)
+-a always,exit -F arch=b64 -F path=/etc/sudoers -F perm=rwxa
+-a always,exit -F arch=b32 -F path=/etc/sudoers -F perm=rwxa
+
+# Monitor changes in /etc/sudoers.d/ (additional sudo configurations)
+-a always,exit -F arch=b64 -F dir=/etc/sudoers.d
+-a always,exit -F arch=b32 -F dir=/etc/sudoers.d
+
+# Audit changes to /etc/hostname (hostname can affect network identity)
+-a always,exit -F arch=b64 -F path=/etc/hostname -F perm=rwxa
+-a always,exit -F arch=b32 -F path=/etc/hostname -F perm=rwxa
+
+# Audit changes to /etc/hosts (important for network resolution)
+-a always,exit -F arch=b64 -F path=/etc/hosts -F perm=rwxa
+-a always,exit -F arch=b32 -F path=/etc/hosts -F perm=rwxa
+
+# Audit changes to cron configuration (cron.d, cron.daily, etc.)
+-a always,exit -F arch=b64 -F dir=/etc/cron.d
+-a always,exit -F arch=b32 -F dir=/etc/cron.d
+-a always,exit -F arch=b64 -F dir=/etc/cron.daily
+-a always,exit -F arch=b32 -F dir=/etc/cron.daily
+
+# Audit changes to systemd service configurations
+-a always,exit -F arch=b64 -F dir=/etc/systemd/system
+-a always,exit -F arch=b32 -F dir=/etc/systemd/system
 ```
 
 Audit ownership changes:
