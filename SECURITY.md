@@ -459,6 +459,19 @@ aa-teardown
 next, ensure `audit` is set up + running for log-based profile building.
 
 
+profiles are stored in /etc/apparmor.d/<path>.<to>.<binary>
+
+to generate a profile:
+aa-genprof <path to executable>
+aa-enforce <path to executable>
+
+NOTE: Currently the tools do not properly utilize variables such as @{PROC},
+and @{HOME}, so you may want to adjust the profile after to use
+abstractions that the tools could not discover.
+
+add rules with aa-logprof or set it back with aa-complain
+
+
 ## to configure notifications on apparmor deny:
 groupadd -r audit
 gpasswd -a user audit
