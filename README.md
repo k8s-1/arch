@@ -178,11 +178,6 @@ fwupdmgr get-devices
 fwupdmgr refresh
 fwupdmgr get-updates
 fwupdmgr update
-# in case of lockout, rebind the tpm key ---> login with recovery key:
-systemd-cryptenroll /dev/root_partition --wipe-slot=auto --tpm2-device=auto --tpm2-pcrs=7+15
-
-
-
 
 # Disable hibernate
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
