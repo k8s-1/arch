@@ -166,20 +166,6 @@ NOTE: Unified kernel images (UKIs) in esp/EFI/Linux/uki.efi are automatically so
 # Generate initramfs
 mkinitcpio -P
 
-# SECURE BOOT
-# sign existing bootloader
-sbctl status
-sbctl create-keys
-<!-- Enroll your keys to UEFI, along with Microsoft's and firmware vendor keys, to the UEFI: -->
-sbctl enroll-keys -m -f
-sbctl status
-sbctl verify
-# Use the output from sbctl verify to see what needs to be signed
-# EXAMPLE
-sbctl sign -s /boot/vmlinuz-linux
-sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-
-
 # REBOOT
 exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
