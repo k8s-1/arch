@@ -65,7 +65,6 @@ mount /dev/mapper/root /mnt
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
 
-
 # Turn on swap
 swapon /dev/swap_partition
 
