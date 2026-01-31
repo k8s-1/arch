@@ -8,9 +8,6 @@ https://wiki.archlinux.org/title/Sudo
 visudo
 sudo -ll
 
-/etc/sudoers.d/10-insults
-Defaults insults
-
 /etc/sudoers.d/10-wheel
 %wheel      ALL=(ALL:ALL) ALL
 
