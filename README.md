@@ -171,22 +171,9 @@ exit
 umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
 reboot
 
-# CONFIGURE FIRMWARE UPDATES
-pacman -S fwupd
-sbctl sign -s -o /usr/lib/fwupd/efi/fwupdx64.efi.signed /usr/lib/fwupd/efi/fwupdx64.efi
-
-Then after each update of fwupd, the UEFI executable will be automatically signed, thanks to the sbctl pacman hook (/usr/share/libalpm/hooks/zz-sbctl.hook).
-
-Finally, configure /etc/fwupd/fwupd.conf
-
-```
-...
-
-[uefi_capsule]
-DisableShimForSecureBoot=true
-```
 sudo systemctl enable --now fwupd.service
 # UPDATE FIRMWARE - DO THIS MANUALLY YEARLY ~ (!! can cause tpm lockout due to PC7 change)
+pacman -S fwupd
 fwupdmgr get-devices
 fwupdmgr refresh
 fwupdmgr get-updates
