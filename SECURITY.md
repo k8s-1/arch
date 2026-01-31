@@ -222,8 +222,14 @@ sudo lynis show report
 
 
 # swaylock + swayidle
-https://wiki.archlinux.org/title/Sway#Idle
-TODO - trigger via sway shortcut
+pacman -S swaylock
+
+https://wiki.archlinux.org/title/Sway#Custom_keybindings
+
+~/.config/sway/config
+```
+bindsym $mod+l exec swaylock
+```
 
 
 
@@ -240,6 +246,8 @@ input type:touchpad {
 
 
 # swayidle
+pacman -S swayidle
+
 https://wiki.archlinux.org/title/Sway#Idle
 The following instructs swayidle to lock the screen after 30 minutes and turn it off five seconds after:
 
