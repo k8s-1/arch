@@ -10,7 +10,7 @@ sudo -ll
 
 useradd -m -G wheel -s /bin/bash username
 passwd username
-groups username
+groups username # verify
 
 /etc/sudoers.d/10-wheel
 %wheel      ALL=(ALL:ALL) ALL
