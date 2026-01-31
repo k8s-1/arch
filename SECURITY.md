@@ -203,6 +203,8 @@ TODO
 
 # browser security
 TODO
+- noscript
+- ublock origin
 
 
 
