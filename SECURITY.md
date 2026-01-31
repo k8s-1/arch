@@ -455,9 +455,7 @@ aa-enabled
 if you need to disable apparmor:
 aa-teardown
 
-
 next, ensure `audit` is set up + running for log-based profile building.
-
 
 profiles are stored in /etc/apparmor.d/<path>.<to>.<binary>
 
