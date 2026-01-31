@@ -133,7 +133,7 @@ sudo lynis show report
 
 
 # systemd audit
-systemd-analzye
+systemd-analzye security
 
 
 
