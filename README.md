@@ -1,6 +1,5 @@
 https://wiki.archlinux.org/title/Installation_guide
 
-
 # Disk Layout
 /boot   - 1GB   efi
 /swap   - 16GB  encrypted linux-swap
