@@ -291,7 +291,6 @@ systemctl --failed
 
 
 
-
 # chkrootkit/rkhunter + system tray notify
 TODO
 
