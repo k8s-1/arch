@@ -132,9 +132,6 @@ sudo lynis show report
 ```
 
 
-# systemd audit
-systemd-analzye security
-
 
 
 # swaylock + swayidle
@@ -245,7 +242,8 @@ TODO
 
 
 # harden systemd services (e.g. docker.d)
-TODO
+systemd-analzye security
+
 
 
 
