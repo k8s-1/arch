@@ -28,8 +28,6 @@ mount /dev/mapper/root /mnt
 mkfs.fat -F32 /dev/sda1
 mount --mkdir /dev/sda1 /mnt/boot
 
-
-
 # Configure mkinitcpio
 If using the default systemd-based initramfs, add the keyboard and sd-encrypt hooks to mkinitcpio.conf. If you use a non-US console keymap or a non-default console font, additionally add the sd-vconsole hook.
 
