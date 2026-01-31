@@ -36,8 +36,6 @@ HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block 
 Then follow https://wiki.archlinux.org/title/Installation_guide#Initramfs, re-create initramfs:
 `mkinitcpio -P`
 
-
-
 # Configure systemd-boot bootloader:
 Copy the systemd-boot UEFI boot manager to the ESP, create a UEFI boot entry for it and set it as the first in the UEFI boot order:
 bootctl install
