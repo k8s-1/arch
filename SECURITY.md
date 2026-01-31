@@ -204,7 +204,7 @@ TODO
 # browser security
 - noscript
 - ublock origin
-- config... TODO
+- config...
 
 
 
