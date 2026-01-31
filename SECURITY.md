@@ -121,7 +121,7 @@ TODO
 
 
 
-# lynis auditing
+# lynis audit
 Repeat this audit regularly to check how the system can be improved.
 Don't try to fix everything at once and test changes (especially kernel parameters).
 Turn off unused services.
