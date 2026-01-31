@@ -56,7 +56,6 @@ mkfs.fat -F 32 /dev/efi_system_partition
 mkswap /dev/swap_partition
 mkfs.ext4 /dev/mapper/root
 
-
 # Mount FS
 mount /dev/mapper/root /mnt
 # (!) verify it works:
