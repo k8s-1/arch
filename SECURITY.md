@@ -440,7 +440,53 @@ PermitRootLogin no
 
 
 # apparmor (few select profiles for services, browser, pdf-reader, docker)
-TODO
+https://wiki.archlinux.org/title/AppArmor
+
+pacman -S apparmor
+systemctl start apparmor.service
+systemctl enable apparmor.service
+
+set kernel parameter via systemd-boot:
+lsm=landlock,lockdown,yama,integrity,apparmor,bpf
+
+test if enabled:
+aa-enabled
+
+if you need to disable apparmor:
+aa-teardown
+
+
+next, ensure `audit` is set up + running for log-based profile building.
+
+
+## to configure notifications on apparmor deny:
+groupadd -r audit
+gpasswd -a user audit
+
+/etc/audit/auditd.conf
+log_group = audit
+
+
+/etc/tmpfiles.d/audit.conf
+z /var/log/audit 750 root audit - -
+
+
+pacman -S python-notify2 python-psutil
+
+Create a desktop launcher with the following content:
+~/.config/autostart/apparmor-notify.desktop
+
+[Desktop Entry]
+Type=Application
+Name=AppArmor Notify
+Comment=Receive on-screen notifications of AppArmor denials
+TryExec=aa-notify
+Exec=aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
+StartupNotify=false
+NoDisplay=true
+
+Reboot and check if the aa-notify process is running:
+$ pgrep -ax aa-notify
 
 
 
