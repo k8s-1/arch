@@ -2,8 +2,6 @@ Basic LUKS + password, no TPM crap
 
 https://wiki.archlinux.org/title/Dm-crypt/Specialties#Securing_the_unencrypted_boot_partition
 
-
-
 # wipe partition headers
 cryptsetup erase /dev/sda      # remove LUKS headers
 wipefs -a /dev/sda             # remove filesystem/partition metadata
