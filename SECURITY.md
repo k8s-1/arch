@@ -228,7 +228,7 @@ https://wiki.archlinux.org/title/Sway#Custom_keybindings
 
 ~/.config/sway/config - configure shortcut
 ```
-bindsym $mod+l exec swaylock
+bindsym $mod+l exec swaylock --show-failed-attempts --no-unlock-indicator --color 000000 --disable-caps-lock-text
 ```
 
 
