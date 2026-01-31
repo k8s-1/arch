@@ -120,7 +120,8 @@ passwd
 HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
 
 <!-- Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first. -->
-# Configure Bootloader
+# Configure systemd-boot bootloader
+bootctl install
 
 # Generate initramfs
 mkinitcpio -P
