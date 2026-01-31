@@ -4,7 +4,15 @@ https://wiki.archlinux.org/title/Security
 
 
 # configure sudo
-TODO https://wiki.archlinux.org/title/Sudo
+https://wiki.archlinux.org/title/Sudo
+visudo
+sudo -ll
+
+/etc/sudoers.d/10-wheel
+%wheel      ALL=(ALL:ALL) ALL
+
+/etc/sudoers.d/90-archie_commands
+archie hostname= NOPASSWD: /usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu
 
 
 
@@ -249,10 +257,8 @@ https://wiki.archlinux.org/title/Systemd/Sandboxing
 
 
 # disable root login
+check if you can sudo su, then
 sudo passwd --lock root
-
-# configure sudo
-%wheel ALL=(ALL) ALL
 
 # lock other service accounts:
 sudo passwd -l nobody ftp git mail systemd-network systemd-timesync systemd-journal dbus avahi lp pulse
