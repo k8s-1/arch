@@ -227,6 +227,18 @@ TODO - trigger via sway shortcut
 
 
 
+# touchpad
+Input devices
+It is possible to tweak specific input device configurations. For example, to enable tap-to-click and natural scrolling for all touchpads:
+
+~/.config/sway/config
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+
+
 # swayidle
 https://wiki.archlinux.org/title/Sway#Idle
 The following instructs swayidle to lock the screen after 30 minutes and turn it off five seconds after:
