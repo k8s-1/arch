@@ -24,7 +24,6 @@ cryptsetup close root
 cryptsetup open /dev/sda2 root
 mount /dev/mapper/root /mnt
 
-
 # EFI PARTITION
 mkfs.fat -F32 /dev/sda1
 mount --mkdir /dev/sda1 /mnt/boot
