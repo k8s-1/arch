@@ -305,10 +305,12 @@ rkhunter --config-check
 
 Out of the box, Rootkit Hunter will throw up some false warnings during the file properties check. This occurs because a few of the core utilities have been replaced by scripts. These warnings can be muted through white-listing:
 /etc/rkhunter.conf
+```
 SCRIPTWHITELIST=/usr/bin/egrep
 SCRIPTWHITELIST=/usr/bin/fgrep
 SCRIPTWHITELIST=/usr/bin/ldd
 SCRIPTWHITELIST=/usr/bin/vendor_perl/GET
+```
 
 
 
