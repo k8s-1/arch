@@ -192,7 +192,14 @@ HandleLidSwitchDocked=ignore
 systemctl restart systemd-logind
 
 
+# UKI hash monitor
+Compute a hash of UKI when it’s known-good:
 
+mkdir -p /etc/ukisums
+sha256sum esp/EFI/Linux/arch.uki > /etc/ukisums/arch.uki.sha256
 
-
+Run integrity check before maintenance:
+sha256sum -c /etc/ukisums/arch.uki.sha256
+<system-update>
+<update-hash>
 
