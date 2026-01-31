@@ -227,6 +227,18 @@ TODO - trigger via sway shortcut
 
 
 
+# swayidle
+https://wiki.archlinux.org/title/Sway#Idle
+The following instructs swayidle to lock the screen after 30 minutes and turn it off five seconds after:
+
+~/.config/sway/config
+exec swayidle -w \
+	timeout 1800 'swaylock -f' \
+	timeout 1805 'swaymsg "output * power off"' \
+		resume 'swaymsg "output * power on"'
+
+
+
 
 # pam
 The pam package is a dependency of the base meta package and, thereby, normally installed on an Arch system. The PAM modules are installed into /usr/lib/security exclusively. 
