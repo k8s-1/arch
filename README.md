@@ -121,7 +121,47 @@ HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block 
 
 <!-- Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first. -->
 # Configure systemd-boot bootloader
+Copy the systemd-boot UEFI boot manager to the ESP, create a UEFI boot entry for it and set it as the first in the UEFI boot order:
 bootctl install
+lsblk -f
+
+Set kernel parameter:
+cryptdevice=UUID=device-UUID:root root=/dev/mapper/root
+
+Add a pacman hook to update the bootloader in /efi when there is an update:
+/etc/pacman.d/hooks/95-systemd-boot.hook
+```
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Gracefully upgrading systemd-boot...
+When = PostTransaction
+Exec = /usr/bin/systemctl restart systemd-boot-update.service
+```
+
+Configure loader - a basic loader configuration file is located at /usr/share/systemd/bootctl/loader.conf:
+esp/loader/loader.conf
+```
+default  arch.conf
+timeout  4
+console-mode max
+editor   no
+```
+
+Add loaders; systemd-boot will search for .conf files in /loader/entries/ on the EFI system partition
+```
+esp/loader/entries/arch.conf
+
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw
+```
+
+NOTE: Unified kernel images (UKIs) in esp/EFI/Linux/uki.efi are automatically sourced by systemd-boot, and do not need an entry in esp/loader/entries
 
 # Generate initramfs
 mkinitcpio -P
