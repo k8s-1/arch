@@ -205,14 +205,6 @@ Check anomalies:
 aureport -n
 
 
-Rotate the logs - send SIGUSR1 to the audit daemon:
-pkill -USR1 -x auditd
-And adjust as needed /etc/audit/auditd.conf
-
-
-Setup logwatch for further automation: sudo pacman -S logwatch
-
-
 
 
 
