@@ -295,9 +295,6 @@ systemctl --failed
 Prior to running for the first time, update file properties db:
 rkhunter --propupd
 
-Main config:
-/etc/rkhunter.conf
-
 Running:
 rkhunter --update
 rkhunter --check --sk
