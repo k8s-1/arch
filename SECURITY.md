@@ -8,13 +8,13 @@ https://wiki.archlinux.org/title/Sudo
 visudo
 sudo -ll
 
+usermod -aG wheel username
+
 /etc/sudoers.d/10-wheel
 %wheel      ALL=(ALL:ALL) ALL
 
-usermod -aG wheel username
-
 /etc/sudoers.d/90-archie_commands
-archie hostname= NOPASSWD: /usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu
+archie ALL=(ALL) NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/pacman -Syu
 
 
 
