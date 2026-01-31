@@ -14,7 +14,7 @@ usermod -aG wheel username
 %wheel      ALL=(ALL:ALL) ALL
 
 /etc/sudoers.d/90-archie_commands
-archie ALL=(ALL) NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/pacman -Syu
+username ALL=(ALL) NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/pacman -Syu
 
 
 
