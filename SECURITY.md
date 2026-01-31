@@ -132,6 +132,10 @@ sudo lynis show report
 ```
 
 
+# systemd audit
+systemd-analzye
+
+
 
 # swaylock + swayidle
 TODO - trigger via sway shortcut
