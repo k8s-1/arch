@@ -137,7 +137,7 @@ Operation = Upgrade
 Target = systemd
 
 [Action]
-Description = Gracefully upgrading systemd-boot...
+Description = Upgrading systemd-boot...
 When = PostTransaction
 Exec = /usr/bin/systemctl restart systemd-boot-update.service
 ```
