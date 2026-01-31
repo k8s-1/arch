@@ -474,6 +474,31 @@ or set it back with:
 aa-complain <path to executable>
 
 
+
+profiles to configure:
+- systemd
+- dbus
+- firefox
+- file manager
+- docker
+- pdfreader
+
+
+# firejail
+https://wiki.archlinux.org/title/Firejail#Enable_AppArmor_support
+firejail --apparmor firefox
+firejail --list
+
+The security risk of Firejail being a SUID executable can be mitigated by adding the line
+`force-nonewprivs yes`
+to /etc/firejail/firejail.config
+
+Use firejail by default for all apps for which it has profiles:
+firecfg             # set default, creates symlinks
+firecfg --clean     # undo set default, removes symlinks
+
+
+
 ## to configure notifications on apparmor deny:
 groupadd -r audit
 gpasswd -a user audit
