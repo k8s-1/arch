@@ -20,7 +20,7 @@ cryptsetup erase /dev/sdX      # remove LUKS headers
 wipefs -a /dev/sdX             # remove filesystem/partition metadata
 
 lsblk
-fdisk /dev/example
+fdisk /dev/sdX
 
 ## Create GPT partition table
 g
