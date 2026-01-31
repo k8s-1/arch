@@ -36,18 +36,6 @@ w
 
 fdisk -l
 
-# Encrypt swap with ephemeral key - (!) ensure hibernate is disabled
-## https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#UUID_and_LABEL
-mkfs.ext2 -L cryptswap /dev/swap_partition 1M
-blkid /dev/swap_partition
-
-/etc/crypttab
-# <name> <device>         <password>    <options>
-swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
-/etc/fstab
-# <filesystem>    <dir>  <type>  <options>  <dump>  <pass>
-/dev/mapper/swap  none   swap    defaults   0       0
-
 # Encrypt root
 ## https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition
 cryptsetup -v luksFormat /dev/root_partition
@@ -66,6 +54,19 @@ mount /dev/mapper/root /mnt
 # cryptsetup open /dev/sda2 root
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
+
+
+# Encrypt swap with ephemeral key - (!) ensure hibernate is disabled
+## https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#UUID_and_LABEL
+mkfs.ext2 -L cryptswap /dev/swap_partition 1M
+blkid /dev/swap_partition
+
+/etc/crypttab
+# <name> <device>         <password>    <options>
+swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
+/etc/fstab
+# <filesystem>    <dir>  <type>  <options>  <dump>  <pass>
+/dev/mapper/swap  none   swap    defaults   0       0
 
 # Turn on swap
 swapon /dev/swap_partition
