@@ -3,14 +3,18 @@ https://wiki.archlinux.org/title/Security
 
 
 
+# configure non-root user
+useradd -m -G wheel -s /bin/bash username
+passwd username
+groups username
+
+
+
 # configure sudo
 https://wiki.archlinux.org/title/Sudo
 visudo
 sudo -ll
 
-useradd -m -G wheel -s /bin/bash username
-passwd username
-groups username # verify
 
 /etc/sudoers.d/10-wheel
 %wheel      ALL=(ALL:ALL) ALL
