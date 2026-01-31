@@ -253,9 +253,35 @@ fs.protected_regular = 2
 
 
 
-# clamav + chkrootkit/rkhunter + system tray notify
+# clamav [add to maintenance.sh]
+https://wiki.archlinux.org/title/ClamAV
+pacman -S clamav
+freshclam # update clamav db
+Start/enable clamav-freshclam-once.timer (runs freshclam 1x / day)
+
+Run a manual scan:
+clamscan --recursive --infected --log=/var/log/clamav/home_scan.log /home/$USER
+
+Run a system scan:
+sudo clamscan --recursive --infected --log=/var/log/clamav/system_scan.log /usr /bin /etc /lib
+
+Add this to maintenance script.
+
+
+
+# check system package integrity [add to maintenance.sh]
+sudo pacman -Qk
+
+
+
+
+
+# chkrootkit/rkhunter + system tray notify
 TODO
 
+
+
+# lograte
 
 
 
