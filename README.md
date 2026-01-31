@@ -172,7 +172,7 @@ umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
 reboot
 
 sudo systemctl enable --now fwupd.service
-# UPDATE FIRMWARE - DO THIS MANUALLY YEARLY ~ (!! can cause tpm lockout due to PC7 change)
+# UPDATE FIRMWARE - DO THIS MANUALLY YEARLY
 pacman -S fwupd
 fwupdmgr get-devices
 fwupdmgr refresh
