@@ -9,7 +9,8 @@ passwd username
 groups username
 
 NOTE: repeat this for a "dev" account with minimal permissions
-that does not have ALL:ALL, sudo su into dev account
+that does not have ALL:ALL, sudo su into dev account,
+never install programming toolchains on daily driving account
 
 
 
