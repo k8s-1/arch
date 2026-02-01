@@ -209,6 +209,28 @@ Check anomalies:
 aureport -n
 
 
+also nice to have (according to chatgpt):
+auditctl -a always,exit -F arch=b64 \
+  -S chmod,fchmod,fchmodat \
+  -S chown,fchown,fchownat,lchown \
+  -k perm_changes
+auditctl -w /etc -p wa -k etc_changes
+auditctl -w /home -p wa -k home_changes
+auditctl -w /usr/bin -p wa -k bin_changes
+auditctl -w /usr/sbin -p wa -k sbin_changes
+
+
+
+Also lock the rules:
+sudo auditctl -R /etc/audit/rules.d/*.rules
+sudo auditctl -l          # verify rules
+sudo auditctl -e 2        # lock
+
+Make it persistent:
+echo "-e 2" | sudo tee /etc/audit/rules.d/99-lockdown.rules
+
+
+
 
 
 
