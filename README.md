@@ -49,8 +49,6 @@ cryptsetup open /dev/root_partition root
 
 # Format partitions
 mkfs.fat -F 32 /dev/efi_system_partition
-
-
 mkfs.ext4 /dev/mapper/root
 
 # Mount FS
