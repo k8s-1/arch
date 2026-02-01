@@ -108,7 +108,7 @@ vim /etc/locale.conf
 LANG=en_US.UTF-8
 ```
 
-/etc/hostname
+vim /etc/hostname
 ```
 yourhostname # 1-64 chars, lowercase, allowed chars: a-z, 0-9, -
 ```
