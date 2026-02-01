@@ -50,9 +50,6 @@ cryptsetup open /dev/root_partition root
 # Format partitions
 mkfs.fat -F 32 /dev/efi_system_partition
 
-We first create a small label to identify the encrypted swap partition:
-mkfs.ext2 -L cryptswap /dev/swap_partition 1M
-mkswap /dev/swap_partition
 
 mkfs.ext4 /dev/mapper/root
 
@@ -65,8 +62,13 @@ mount /dev/mapper/root /mnt
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
 
+
+# ENCRYPTED SWAP
 # Encrypt swap with ephemeral key - (!) ensure hibernate is disabled -> this setup does not support hibernate
 ## https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#UUID_and_LABEL
+We first create a small label to identify the encrypted swap partition:
+mkfs.ext2 -L cryptswap /dev/swap_partition 1M
+
 blkid /dev/swap_partition
 
 /etc/crypttab
