@@ -97,7 +97,8 @@ timedatectl set-ntp true
 timedatectl status  # expect UTC time
 
 # Uncomment the UTF-8 locales you will be using.
-vim /etc/locale.gen
+vi /etc/locale.gen
+en_US.UTF-8 UTF-8
 
 # Generate the locales:
 locale-gen
