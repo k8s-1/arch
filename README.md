@@ -122,7 +122,7 @@ passwd
 
 <!-- https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition_with_TPM2_and_Secure_Boot -->
 # Configure initramfs image
-`/etc/mkinitcpio.conf`
+vim /etc/mkinitcpio.conf
 HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
 
 <!-- Do not regenerate the initramfs yet, as the /boot/EFI/Linux directory needs to be created by the boot loader installer first. -->
