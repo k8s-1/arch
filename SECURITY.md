@@ -497,8 +497,6 @@ aa-logprof
 or set it back with:
 aa-complain <path to executable>
 
-
-
 profiles to configure:
 - systemd
 - dbus
