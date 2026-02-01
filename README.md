@@ -57,7 +57,7 @@ mount /dev/mapper/root /mnt
 # (!) verify it works:
 # umount /mnt
 # cryptsetup close root
-# cryptsetup open /dev/sda2 root
+# cryptsetup open /dev/sdaX root
 # mount /dev/mapper/root /mnt
 mount --mkdir /dev/efi_system_partition /mnt/boot
 
