@@ -68,7 +68,7 @@ We first create a small label to identify the encrypted swap partition:
 mkfs.ext2 -L cryptswap /dev/swap_partition 1M
 
 blkid /dev/swap_partition
-
+## TODO after system bootstrap
 /etc/crypttab
 # <name> <device>         <password>    <options>
 swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
