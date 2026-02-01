@@ -53,7 +53,7 @@ mkfs.ext4 /dev/mapper/root
 
 # Mount FS
 mount /dev/mapper/root /mnt
-# (!) verify it works:
+# (!) optionally verify it works:
 # umount /mnt
 # cryptsetup close root
 # cryptsetup open /dev/sdaX root
