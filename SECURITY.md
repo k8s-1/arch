@@ -572,6 +572,14 @@ https://wiki.archlinux.org/title/Systemd/Sandboxing
 
 
 
+# configure docker rootless
+(!) without, user can escalate to host root
+
+https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
+
+
+
+
 
 # disable root login
 check if you can sudo su, then
