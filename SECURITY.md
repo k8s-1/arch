@@ -8,6 +8,9 @@ useradd -m -G wheel -s /bin/bash username
 passwd username
 groups username
 
+NOTE: repeat this for a "dev" account with minimal permissions
+that does not have ALL:ALL
+
 
 
 # configure sudo
