@@ -9,7 +9,7 @@ passwd username
 groups username
 
 NOTE: repeat this for a "dev" account with minimal permissions
-that does not have ALL:ALL
+that does not have ALL:ALL, sudo su into dev account
 
 
 
