@@ -22,7 +22,7 @@ iwctl
 # Partition
 fdisk -l
 ## Delete existing partition tables and labels
-cryptsetup erase -q /dev/sdX      # remove LUKS headers
+cryptsetup erase /dev/sdX      # remove LUKS headers
 wipefs -a /dev/sdX             # remove filesystem/partition metadata
 
 lsblk
