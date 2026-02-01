@@ -76,9 +76,6 @@ swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,
 # <filesystem>    <dir>  <type>  <options>  <dump>  <pass>
 /dev/mapper/swap  none   swap    defaults   0       0
 
-# Turn on swap
-swapon /dev/swap_partition
-
 # Install base packages
 pacstrap -K /mnt base linux linux-firmware
 
