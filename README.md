@@ -11,7 +11,13 @@ LUKS password -> autologin + swaylock if needed
 # First prepare boot medium
 # Disable UEFI secure boot
 # Launch instaler
-# Connect to WiFi with `iwctl` if needed
+# Connect to WiFi with `iwctl` if needed:
+iwctl
+[iwd]# device list
+[iwd]# station name scan
+[iwd]# station name get-networks
+[iwd]# station name connect SSID OR [iwd]# station name connect-hidden SSID
+
 
 # Partition
 fdisk -l
