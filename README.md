@@ -103,7 +103,7 @@ en_US.UTF-8 UTF-8
 # Generate the locales:
 locale-gen
 
-/etc/locale.conf
+vim /etc/locale.conf
 ```
 LANG=en_US.UTF-8
 ```
