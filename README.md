@@ -77,7 +77,7 @@ swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,
 /dev/mapper/swap  none   swap    defaults   0       0
 
 # Install base packages
-pacstrap -K /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware vim
 
 # Configure system
 <!-- mkdir -p /mnt/etc -->
@@ -97,7 +97,7 @@ timedatectl set-ntp true
 timedatectl status  # expect UTC time
 
 # Uncomment the UTF-8 locales you will be using.
-vi /etc/locale.gen
+vim /etc/locale.gen
 en_US.UTF-8 UTF-8
 
 # Generate the locales:
