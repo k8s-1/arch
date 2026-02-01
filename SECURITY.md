@@ -219,8 +219,6 @@ auditctl -w /home -p wa -k home_changes
 auditctl -w /usr/bin -p wa -k bin_changes
 auditctl -w /usr/sbin -p wa -k sbin_changes
 
-
-
 Also lock the rules:
 sudo auditctl -R /etc/audit/rules.d/*.rules
 sudo auditctl -l          # verify rules
