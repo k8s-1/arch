@@ -133,7 +133,7 @@ bootctl install
 lsblk -f
 blkid
 
-Set kernel parameter in /etc/cmdline.d/root.conf (everything in /etc/cmdline.d/ gets parsed)
+Set kernel parameter in /etc/cmdline.d/root.conf (everything in /etc/cmdline.d/*.conf gets parsed)
 lsblk -f | grep sdX > /etc/cmdline.d/root.conf
 vim /etc/cmdline.d/root.conf
 cryptdevice=UUID=device-UUID:root root=/dev/mapper/root
