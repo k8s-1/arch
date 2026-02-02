@@ -132,7 +132,7 @@ Copy the systemd-boot UEFI boot manager to the ESP, create a UEFI boot entry for
 bootctl install
 lsblk -f
 
-Set kernel parameter:
+Set kernel parameter in /etc/cmdline.d/root.conf (everything in /etc/cmdline.d/ gets parsed)
 cryptdevice=UUID=device-UUID:root root=/dev/mapper/root
 
 Add a pacman hook to update the bootloader in /efi when there is an update:
