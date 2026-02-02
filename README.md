@@ -131,6 +131,7 @@ HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block 
 Copy the systemd-boot UEFI boot manager to the ESP, create a UEFI boot entry for it and set it as the first in the UEFI boot order:
 bootctl install
 lsblk -f
+blkid
 
 Set kernel parameter in /etc/cmdline.d/root.conf (everything in /etc/cmdline.d/ gets parsed)
 cryptdevice=UUID=device-UUID:root root=/dev/mapper/root
