@@ -2,16 +2,6 @@
 https://wiki.archlinux.org/title/Security
 
 
-
-# configure non-root user
-useradd -m -G wheel -s /bin/bash username
-passwd username
-groups username
-
-NOTE: repeat this for a "dev" account with minimal permissions
-that does not have ALL:ALL, sudo su into dev account,
-never install programming toolchains on daily driving account
-
 # configure sudo
 https://wiki.archlinux.org/title/Sudo
 visudo
