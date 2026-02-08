@@ -3,10 +3,6 @@
   connection: local
 
   tasks:
-    - name: "Test"
-      ansible.builtin.command:
-        cmd: echo test
-
     - name: Install community.general collection
       ansible.builtin.command:
         cmd: ansible-galaxy collection install community.general
