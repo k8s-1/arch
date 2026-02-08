@@ -16,8 +16,7 @@ timedatectl set-ntp true
 
 # --- SET VARS
 
-echo -n "hostname: "
-read -r hostname
+read -r -p "hostname: " hostname
 : "${hostname:?}"
 
 lsblk
