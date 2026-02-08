@@ -21,7 +21,7 @@ echo
 
 lsblk
 read -r -p "device NAME to partition .e.g. sda (WARNING: loses all data!): " device
-: "${device:?}"
+echo
 
 while true; do
   echo -n "LUKS encryption password: "
