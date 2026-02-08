@@ -1,17 +1,3 @@
-# Bootloader automatic update
-/etc/pacman.d/hooks/95-systemd-boot.hook
-```
-[Trigger]
-Type = Package
-Operation = Upgrade
-Target = systemd
-
-[Action]
-Description = Gracefully upgrading systemd-boot...
-When = PostTransaction
-Exec = /usr/bin/systemctl restart systemd-boot-update.service
-```
-
 # Power management
 pacman -S tlp
 systemctl enable tlp.service
