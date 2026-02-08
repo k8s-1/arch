@@ -36,16 +36,9 @@ while true; do
   [[ "$luks_pw" == "$luks_pw2" ]] && break
 done
 
-while true; do
-  echo -n "root password: "
-  read -r -s root_pw
-  echo
-  echo -n "root password (repeat): "
-  read -r -s root_pw2
-  echo
-
-  [[ "$root_pw" == "$root_pw2" ]] && break
-done
+echo -n "root password: "
+read -r -s root_pw
+echo
 
 echo -n "user password: "
 read -r -s user_pw
