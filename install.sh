@@ -36,10 +36,6 @@ setvars() {
   read -r -s user_pw
   echo
 
-  echo -n "dev user password: "
-  read -r -s dev_pw
-  echo
-
   read -r -p "username: " user
   echo
 
@@ -170,12 +166,10 @@ EOF
 users () {
   echo "Setting up user accounts..."
 
-  devuser="dev"
   arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,video,audio,storage "$user"
   arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
 
   echo "$user:$user_pw" | chpasswd --root /mnt
-  echo "$devuser:$dev_pw" | chpasswd --root /mnt
   echo "root:$root_pw" | chpasswd --root /mnt
 }
 
