@@ -79,23 +79,29 @@
         state: enabled
       become: true
 
-    - name: Enable UFW systemd service
-      ansible.builtin.systemd:
-        name: ufw
-        enabled: true
-        state: started
-      become: true
-
     - name: Deny all incoming traffic
       ufw:
         rule: deny
         direction: in
       become: true
 
+    - name: Deny all incoming traffic
+      ufw:
+        rule: deny
+        direction: routed
+      become: true
+
     - name: Allow all outgoing traffic
       ufw:
         rule: allow
         direction: out
+      become: true
+
+    - name: Enable UFW systemd service
+      ansible.builtin.systemd:
+        name: ufw
+        enabled: true
+        state: started
       become: true
 
 
