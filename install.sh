@@ -90,12 +90,14 @@ mounts() {
   # make filesystem
   mkfs.vfat -F32 "${part_boot}"
   mkfs.ext4 /dev/mapper/root
-  mkswap "${part_swap}"
 
   # mount filesystem
   mount /dev/mapper/root /mnt
   mount --mkdir "${part_boot}" /mnt/boot
-  swapon "${part_swap}"
+
+  # skipped, we encrypt swap with throwaway key at boot
+  # mkswap "${part_swap}"
+  # swapon "${part_swap}"
 }
 
 
@@ -151,9 +153,6 @@ EOF
 
 swap_encryption () {
   echo "Setting up disk encryption..."
-
-  # ensure swap is turned off
-  swapoff "$part_swap"
 
   # create disk label
   mkfs.ext2 -L cryptswap "$part_swap" 1M
