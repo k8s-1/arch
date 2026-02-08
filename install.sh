@@ -183,7 +183,10 @@ main () {
   swap_encryption
   users
 
-  echo "Setup complete... please reboot."
+  echo "Setup complete... unmounting..."
+  umount -R /mnt
+
+  echo "Please reboot."
 }
 
 main "$@"
