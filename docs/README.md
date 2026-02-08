@@ -17,7 +17,7 @@ iwctl
 [iwd]# station name get-networks
 [iwd]# station name connect SSID
 
-# Recover broken system
+# Recovery
 - boot from live usb
 ```
 cryptsetup luksOpen /dev/sdXn root
