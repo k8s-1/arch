@@ -20,8 +20,8 @@ iwctl
 # Recovery
 - boot from live usb
 ```
+lsblk
 cryptsetup luksOpen /dev/sdXn root
 mount /dev/mapper/root /mnt
-mount /dev/sdXn /mnt/boot
 ```
 - apply fixes
