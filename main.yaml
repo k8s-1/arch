@@ -3,16 +3,398 @@
   connection: local
 
   tasks:
-    - name: Install community.general collection
-      ansible.builtin.command:
-        cmd: ansible-galaxy collection install community.general
-      register: command_output
-      changed_when: "'installed successfully' in command_output.stdout"
+    - name: Install packages
+      community.general.pacman:
+        name:
+          - networkmanager
+          - man
+          - reflector
+          - curl
+          - wget
+          - unzip
+          - ntp
+          - htop
+          - vim
+          - neovim
+          - neofetch
+          - ttf-meslo-nerd
+          - ttf-nerd-fonts-symbols
+          - openssh
+          - tmux
+        state: present
+      become: true
 
-    - name: Install community.crypto collection
-      ansible.builtin.command:
-        cmd: ansible-galaxy collection install community.crypto
-      register: command_output
-      changed_when: "'installed successfully' in command_output.stdout"
+
+    # SERVICES
+    - name: Enable network manager service
+      ansible.builtin.systemd:
+        name: NetworkManager
+        enabled: true
+        state: started
+      become: true
+
+    - name: Disable network manager wait online service
+      ansible.builtin.systemd:
+        name: NetworkManager-wait-online
+        enabled: false
+        state: stopped
+      become: true
+
+    - name: Enable tlp power saving
+      ansible.builtin.systemd:
+        name: tlp
+        enabled: true
+        state: started
+      become: true
+
+    - name: Enable time sync
+      ansible.builtin.systemd:
+        name: systemd-timesyncd
+        enabled: true
+        state: started
+      become: true
+      notify:
+        - Setup ntp
+
+
+    - name: Set hostname
+      ansible.builtin.lineinfile:
+        path: /etc/hostname
+        line: device01
+        state: present
+        create: true
+      become: true
+
+
+    # FIREWALL
+    - name: Install firewall
+      community.general.pacman:
+        name:
+          - ufw
+        state: present
+      become: true
+
+    - name: Enable UFW
+      ufw:
+        state: enabled
+      become: true
+
+    - name: Enable UFW systemd service
+      ansible.builtin.systemd:
+        name: ufw
+        enabled: true
+        state: started
+      become: true
+
+    - name: Deny all incoming traffic
+      ufw:
+        rule: deny
+        direction: in
+      become: true
+
+    - name: Allow all outgoing traffic
+      ufw:
+        rule: allow
+        direction: out
+      become: true
+
+
+    # SWAY WAYLAND DISPLAY MANAGER
+    - name: Install packages for sway
+      community.general.pacman:
+        name:
+          - sway
+          - swaybg
+          - foot
+          - polkit
+          - fuzzel
+          - wl-clipboard
+        state: present
+      become: true
+
+
+    # EXTRA PACKAGES
+    - name: Install extra convencience packages
+      community.general.pacman:
+        name:
+          - noto-fonts
+          - firejail
+          - firefox
+          - arc-gtk-theme
+          - papirus-icon-theme
+          - base-devel
+          - git
+          - fakeroot
+          - go
+          - make
+          - chromium
+          - tree
+        state: present
+      become: true
+
+
+    # CONFIGURE USER ACCESS
+    - name: Add user to groups
+      ansible.builtin.user:
+        name: "{{ username }}"
+        groups: wheel,audio
+        append: true
+      become: true
+
+    - name: Add wheel to sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+        validate: "visudo -cf %s"
+        state: present
+        regexp: "^%wheel.*NOPASSWD:.*$"
+      become: true
+
+    - name: Ensure user directories exist
+      file:
+        path: "/home/{{ username }}/{{ item }}"
+        state: directory
+        mode: "0700"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+      become: true
+      become_user: "{{ username }}"
+      loop:
+        - "Downloads"
+        - "Documents"
+
+
+    # MICROCODE UPDATES
+    - name: Get CPU information
+      command: lscpu
+      register: lscpu
+      changed_when: false
+
+    - name: Install microcode package for Intel CPUs
+      pacman:
+        name: intel-ucode
+      when: "'GenuineIntel' in lscpu.stdout"
+      become: true
+      notify: Update GRUB
+
+    - name: Install microcode package for AMD CPUs
+      pacman:
+        name: amd-ucode
+      when: "'AuthenticAMD' in lscpu.stdout"
+      become: true
+      notify: Update GRUB
+
+
+    # NEOVIM
+    - name: Install packages for neovim config
+      community.general.pacman:
+        name:
+          - ripgrep
+          - nodejs
+          - npm
+          - ttf-meslo-nerd
+        state: present
+      become: true
+      register: register_package
+
+    - name: Update font cache
+      command: fc-cache -f -v
+      become: true
+      when: register_package.changed
+
+
+    # SSH
+    - name: Create user .ssh directory
+      file:
+        path: "/home/{{ username }}/.ssh"
+        state: directory
+        mode: "0700"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+      become: true
+      become_user: "{{ username }}"
+
+    - name: Generate ssh key-pair
+      community.crypto.openssh_keypair:
+        path: "/home/{{ username }}/.ssh/id_ed25519"
+        type: "ed25519"
+      become: true
+      become_user: "{{ username }}"
+
+    - name: Disable SSH service
+      ansible.builtin.systemd:
+        name: sshd
+        enabled: false
+        state: stopped
+      become: true
+
+    - name: Disable SSH in config
+      ansible.builtin.blockinfile:
+        path: /etc/ssh/sshd_config
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          PermitRootLogin no
+          PasswordAuthentication no
+          PubkeyAuthentication no
+          DenyUsers *
+          Protocol 2
+        state: present
+        create: false
+        mode: "0640"
+        owner: "root"
+        group: "root"
+      become: true
+
+
+    # KERNEL SECURITY
+    - name: Harden kernel
+      ansible.builtin.blockinfile:
+        path: /etc/sysctl.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          # protect against SYN flood attacks
+          net.ipv4.tcp_syncookies=1
+
+          # protects against time-wait assassination by dropping RST packets for sockets in the time-wait state
+          net.ipv4.tcp_rfc1337=1
+
+          # disable commonly exploited SACK
+          net.ipv4.tcp_sack=0
+          net.ipv4.tcp_dsack=0
+          net.ipv4.tcp_fack=0
+
+          # do not leak system time
+          net.ipv4.tcp_timestamps=0
+
+          # ignore all ICMP requests to avoid Smurf attacks,
+          # make device enumeration more difficult,
+          # prevent clock fingerprinting through ICMP timestamps
+          net.ipv4.icmp_echo_ignore_all=1
+
+          # enable source validation to protect against IP spoofing
+          net.ipv4.conf.all.rp_filter=1
+          net.ipv4.conf.default.rp_filter=1
+
+          # disable ICMP redirect acceptance to prevent man in middle
+          net.ipv4.conf.all.accept_redirects=0
+          net.ipv4.conf.default.accept_redirects=0
+          net.ipv4.conf.all.secure_redirects=0
+          net.ipv4.conf.default.secure_redirects=0
+          net.ipv6.conf.all.accept_redirects=0
+          net.ipv6.conf.default.accept_redirects=0
+          net.ipv4.conf.all.send_redirects=0
+          net.ipv4.conf.default.send_redirects=0
+
+          # disable source routing to disable network traffic redirect
+          net.ipv4.conf.all.accept_source_route=0
+          net.ipv4.conf.default.accept_source_route=0
+          net.ipv6.conf.all.accept_source_route=0
+          net.ipv6.conf.default.accept_source_route=0
+
+          # disable ipv6 router advertising
+          net.ipv6.conf.all.accept_ra=0
+          net.ipv6.conf.default.accept_ra=0
+
+          # disables debugfs to prevent exposing sensitive kernel information
+          debugfs=off
+
+          # disables obsolete vsyscalls
+          vsyscall=none
+        state: present
+        create: true
+        mode: "0600"
+        owner: root
+        group: root
+      become: true
+
+
+    - name: Configure journald log size
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/journald.conf
+        line: "SystemMaxUse=100M"
+        state: present
+        regexp: "^#SystemMaxUse="
+      become: true
+      notify: Restart journald
+
+
+
+    - name: Setup k8 development tools
+      block:
+        - name: Install k8 packages
+          pacman:
+            name:
+              - docker
+              - kubectl
+              - helm
+              - minikube
+              - bash-completion
+              - kind
+            state: present
+          become: true
+
+        # TODO: secure docker
+
+        # - name: Ensure group docker exists
+        #   ansible.builtin.group:
+        #     name: docker
+        #     state: present
+        #
+        # - name: Add user to virtualization groups
+        #   ansible.builtin.user:
+        #     name: "{{ username }}"
+        #     groups: docker
+        #     append: true
+        #   become: true
+        #   notify: Restart docker service
+
+
+
+    # CONFIGURE AUDIT TOOLS
+    - name: Install audit packages
+      community.general.pacman:
+        name:
+          - rkhunter
+          - lynis
+        state: present
+      become: true
+
+    - name: Disable password SSH login
+      ansible.builtin.blockinfile:
+        path: /etc/rkhunter.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          # outdated commands that have been replaced by shell scripts
+          SCRIPTWHITELIST=/usr/bin/egrep
+          SCRIPTWHITELIST=/usr/bin/fgrep
+          SCRIPTWHITELIST=/usr/bin/ldd
+
+          # systemd files
+          ALLOWHIDDENFILE=/etc/.updated
+          ALLOWHIDDENFILE=/usr/share/man/man5/.k5identity.5.gz
+          ALLOWHIDDENFILE=/usr/share/man/man5/.k5login.5.gz
+
+        state: present
+        create: false
+        mode: "0600"
+        owner: "root"
+        group: "root"
+      become: true
+
+
+  handlers:
+    - name: Setup ntp
+      ansible.builtin.command: timedatectl set-ntp true
+      become: true
+      ignore_errors: true
+
+    - name: Restart journald
+      ansible.builtin.systemd:
+        name: systemd-journald
+        enabled: true
+        state: restarted
+      become: true
+
+
 
 
