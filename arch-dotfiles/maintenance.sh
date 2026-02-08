@@ -18,6 +18,7 @@ fi
 # Prune cache
 sudo paccache -rk2 -u
 
+# Remove orphans
 orphaned=$(pacman -Qdtq)
 if [ -n "$orphaned" ]; then
     sudo pacman -Rns "$orphaned" --noconfirm
