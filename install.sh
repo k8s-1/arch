@@ -162,6 +162,3 @@ arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
 echo "$user:$user_pw" | chpasswd --root /mnt
 echo "$devuser:$dev_pw" | chpasswd --root /mnt
 echo "root:$root_pw" | chpasswd --root /mnt
-
-
-TEST123
