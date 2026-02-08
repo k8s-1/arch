@@ -14,9 +14,9 @@ LUKS password -> autologin + swaylock if needed
 # Connect to WiFi with `iwctl` if needed:
 iwctl
 [iwd]# device list
-[iwd]# station name scan
-[iwd]# station name get-networks
-[iwd]# station name connect SSID OR [iwd]# station name connect-hidden SSID
+[iwd]# station <device-name> scan
+[iwd]# station <device-name> get-networks
+[iwd]# station <device-name> connect SSID
 
 
 # Partition
