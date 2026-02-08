@@ -18,9 +18,11 @@ fi
 # Prune cache
 sudo paccache -rk2 -u
 
-# Remove orphans
-if sudo pacman -Qtdq; then
-    sudo pacman -Qtdq | xargs -n1 sudo pacman -Rns --noconfirm
+orphaned=$(pacman -Qdtq)
+if [ -n "$orphaned" ]; then
+    sudo pacman -Rns "$orphaned" --noconfirm
+else
+    echo "No orphaned packages to remove."
 fi
 
 # Clean cache directory
