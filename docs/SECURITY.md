@@ -26,7 +26,6 @@ sudo -ll
 username ALL=(ALL) NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/pacman -Syu
 
 
-
 # dns
 ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 resolvectl status
