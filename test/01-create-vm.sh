@@ -20,7 +20,8 @@ VBoxManage modifyvm $NAME \
 
 VBoxManage createhd \
   --filename ~/VirtualBox\ VMs/$NAME.vdi \
-  --size 20000
+  --size 20000 \
+  --variant Fixed
 
 VBoxManage storagectl $NAME \
   --name "SATA Controller" \
