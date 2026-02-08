@@ -101,7 +101,7 @@ mounts() {
 
 system () {
   # base packages
-  pacstrap -K /mnt base linux linux-firmware networkmanager vim neovim
+  pacstrap -K /mnt base linux linux-firmware networkmanager vim
 
   # fstab
   genfstab -U /mnt >> /mnt/etc/fstab
