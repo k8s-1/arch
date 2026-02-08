@@ -60,7 +60,7 @@ setvars() {
 
 disk() {
   # allocate space
-  sfdisk force "/dev/$device" << EOF
+  sfdisk "/dev/$device" << EOF
 label: gpt
 
 # EFI
