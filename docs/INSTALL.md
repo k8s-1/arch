@@ -16,8 +16,3 @@ iwctl
 [iwd]# station name scan
 [iwd]# station name get-networks
 [iwd]# station name connect SSID
-
-# REBOOT
-umount -R /mnt
-reboot
-
