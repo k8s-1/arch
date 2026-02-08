@@ -283,17 +283,6 @@ Add this to maintenance script.
 
 
 
-# remove unused packages [add to maintenance.sh]
-orphaned=$(pacman -Qdtq)
-if [ -n "$orphaned" ]; then
-    sudo pacman -Rns $orphaned
-else
-    echo "No orphaned packages to remove."
-fi
-
-
-
-
 # check system package integrity [add to maintenance.sh]
 sudo pacman -Qk
 
