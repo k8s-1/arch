@@ -5,55 +5,21 @@ https://wiki.archlinux.org/title/Installation_guide
 /swap   - 16GB  encrypted linux-swap
 /       -       encrypted ext4
 
-# Login flow
-LUKS password -> autologin + swaylock if needed
+# Pre-install
+- Prepare live usb
+- Disable UEFI secure boot
+- Launch live usb
+- Connect to wifi if wireless:
 
-# First prepare boot medium
-# Disable UEFI secure boot
-# Launch instaler
-# Connect to WiFi with `iwctl` if needed:
 iwctl
 [iwd]# device list
-[iwd]# station <device-name> scan
-[iwd]# station <device-name> get-networks
-[iwd]# station <device-name> connect SSID
+[iwd]# station name scan
+[iwd]# station name get-networks
+[iwd]# station name connect SSID
 
-
-Add a pacman hook to update the bootloader in /efi when there is an update:
-/etc/pacman.d/hooks/95-systemd-boot.hook
+# System recovery
+- boot from live usb
 ```
-[Trigger]
-Type = Package
-Operation = Upgrade
-Target = systemd
-
-[Action]
-Description = Upgrading systemd-boot...
-When = PostTransaction
-Exec = /usr/bin/systemctl restart systemd-boot-update.service
+cryptsetup luksOpen /dev/sdXn root
+mount /dev/mapper/root /mnt
 ```
-
-# REBOOT
-exit
-umount -R /mnt # helps notice any busy partition, troubleshoot with fuser
-reboot
-
-sudo systemctl enable --now fwupd.service
-# UPDATE FIRMWARE - DO THIS MANUALLY YEARLY
-pacman -S fwupd
-fwupdmgr get-devices
-fwupdmgr refresh
-fwupdmgr get-updates
-fwupdmgr update
-
-# UKI hash monitor
-Compute a hash of UKI when it’s known-good:
-
-mkdir -p /etc/ukisums
-sha256sum esp/EFI/Linux/arch.uki > /etc/ukisums/arch.uki.sha256
-
-Run integrity check before maintenance:
-sha256sum -c /etc/ukisums/arch.uki.sha256
-<system-update>
-<update-hash>
-
