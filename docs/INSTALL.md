@@ -6,10 +6,10 @@ https://wiki.archlinux.org/title/Installation_guide
 /       -       encrypted ext4
 
 # Pre-install
-- Prepare boot medium
+- Prepare iso usb
 - Disable UEFI secure boot
-- Launch iso from usb
-- Connect to wifi if needed:
+- Launch iso usb
+- Connect to wifi if wireless:
 
 iwctl
 [iwd]# device list
