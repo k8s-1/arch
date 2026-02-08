@@ -28,8 +28,10 @@ read -r device
 while true; do
   echo -n "LUKS encryption password: "
   read -r -s luks_pw
+  echo
   echo -n "LUKS encryption password (repeat): "
   read -r -s luks_pw2
+  echo
 
   [[ "$luks_pw" == "$luks_pw2" ]] && break
 done
@@ -49,22 +51,12 @@ while true; do
   echo -n "user password: "
   read -r -s user_pw
   echo
-  echo -n "user password (repeat): "
-  read -r -s user_pw2
-  echo
-
-  [[ "$user_pw" == "$user_pw2" ]] && break
 done
 
 while true; do
   echo -n "dev password: "
   read -r -s dev_pw
   echo
-  echo -n "dev password (repeat): "
-  read -r -s dev_pw2
-  echo
-
-  [[ "$dev_pw" == "$dev_pw2" ]] && break
 done
 
 while true; do
