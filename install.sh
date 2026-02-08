@@ -20,8 +20,7 @@ read -r -p "hostname: " hostname
 echo
 
 lsblk
-echo -n "device NAME to partition .e.g. sda (WARNING: loses all data!): "
-read -r device
+read -r -p "device NAME to partition .e.g. sda (WARNING: loses all data!): " device
 : "${device:?}"
 
 while true; do
