@@ -75,8 +75,7 @@ part_root="${device}${suffix}3"
 
 # --- CONFIGURE DISK
 
-# sfdisk "/dev/$device" << EOF
-cat << EOF
+sfdisk "/dev/$device" << EOF
 label: gpt
 
 # EFI
