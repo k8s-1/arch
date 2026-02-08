@@ -7,3 +7,16 @@
       ansible.builtin.command:
         cmd: echo test
 
+    - name: Install community.general collection
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install community.general
+      register: command_output
+      changed_when: "'installed successfully' in command_output.stdout"
+
+    - name: Install community.crypto collection
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install community.crypto
+      register: command_output
+      changed_when: "'installed successfully' in command_output.stdout"
+
+
