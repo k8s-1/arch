@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e
+
+# Update mirror list
+if [ -z "$(find /etc/pacman.d/mirrorlist -mtime -7)" ]; then
+    sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+fi
+
+# Update system and refresh keys if needed
+if sudo pacman -Syu --noconfirm; then
+    :
+else
+    sudo pacman-key --refresh-keys
+    sudo pacman -Syu --noconfirm
+fi
+
+# Prune cache
+sudo paccache -rk2 -u
+
+# Remove orphans
+if sudo pacman -Qtdq; then
+    sudo pacman -Qtdq | xargs -n1 sudo pacman -Rns --noconfirm
+fi
+
+# Clean cache directory
+rm -rf ~/.cache/* && sudo rm -rf /tmp/*
+
+# Cleanup docker objects
+docker system prune -af
+
+# Update rust
+rustup update
+
+
+CHECK="\xE2\x9C\x85"   # ✅
+echo -e "\n${CHECK} Maintance complete."
+
+

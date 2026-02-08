@@ -20,6 +20,7 @@
           - ttf-meslo-nerd
           - ttf-nerd-fonts-symbols
           - openssh
+          - tlp
           - tmux
         state: present
       become: true
@@ -130,7 +131,6 @@
           - papirus-icon-theme
           - base-devel
           - git
-          - fakeroot
           - go
           - make
           - chromium
@@ -387,12 +387,24 @@
         group: "root"
       become: true
 
+    - name: Disable system sleep/hibernate
+      ansible.builtin.copy:
+        dest: /etc/systemd/sleep.conf.d/disable-sleep.conf
+        content: |
+          [Sleep]
+          AllowSuspend=no
+          AllowHibernation=no
+          AllowHybridSleep=no
+          AllowSuspendThenHibernate=no
+        owner: root
+        group: root
+        mode: '0640'
+      become: true
 
   handlers:
     - name: Setup ntp
       ansible.builtin.command: timedatectl set-ntp true
       become: true
-      ignore_errors: true
 
     - name: Restart journald
       ansible.builtin.systemd:
