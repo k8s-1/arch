@@ -93,11 +93,6 @@
         direction: out
       become: true
 
-    - name: Enable UFW
-      ufw:
-        state: enabled
-      become: true
-
     - name: Enable UFW systemd service
       ansible.builtin.systemd:
         name: ufw
