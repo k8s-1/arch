@@ -17,7 +17,7 @@ timedatectl set-ntp true
 # --- SET VARS
 
 read -r -p "hostname: " hostname
-: "${hostname:?}"
+echo
 
 lsblk
 echo -n "device NAME to partition .e.g. sda (WARNING: loses all data!): "
