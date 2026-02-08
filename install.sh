@@ -48,6 +48,20 @@ while true; do
   [[ "$user_pw" == "$user_pw2" ]] && break
 done
 
+while true; do
+  read -r -s -p "dev password: " dev_pw
+  read -r -s -p "dev password (repeat): " dev_pw2
+
+  [[ "$dev_pw" == "$dev_pw2" ]] && break
+done
+
+while true; do
+  read -r -p "username: " user
+  read -r -p "username (repeat): " user2
+
+  [[ "$user" == "$user2" ]] && break
+done
+
 # If device ends with a digit, add "p" before partition number
 suffix=""
 if [[ "$device" =~ [0-9]$ ]]; then
@@ -146,9 +160,9 @@ echo "$swap_line" >> "$fstab_file"
 devuser="dev"
 arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,video,audio,storage "$user"
 arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
-echo "$user:$password" | chpasswd --root /mnt
-echo "$devuser:$password" | chpasswd --root /mnt
-echo "root:$password" | chpasswd --root /mnt
+echo "$user:$user_pw" | chpasswd --root /mnt
+echo "$devuser:$dev_pw" | chpasswd --root /mnt
+echo "root:$root_pw" | chpasswd --root /mnt
 
 
 TEST123
