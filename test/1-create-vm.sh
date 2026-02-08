@@ -28,6 +28,7 @@ VBoxManage storagectl $NAME \
   --add sata \
   --controller IntelAhci
 
+# /dev/sda
 VBoxManage storageattach $NAME \
   --storagectl "SATA Controller" \
   --port 0 \
@@ -35,6 +36,7 @@ VBoxManage storageattach $NAME \
   --type hdd \
   --medium ~/VirtualBox\ VMs/$NAME.vdi
 
+# bootable iso drive
 VBoxManage storageattach $NAME \
   --storagectl "SATA Controller" \
   --port 1 \
