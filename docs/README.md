@@ -23,3 +23,4 @@ iwctl
 cryptsetup luksOpen /dev/sdXn root
 mount /dev/mapper/root /mnt
 ```
+- apply fixes
