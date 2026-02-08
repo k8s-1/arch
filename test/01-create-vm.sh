@@ -15,7 +15,7 @@ VBoxManage modifyvm $NAME \
   --nic1 nat \
   --boot1 dvd \
   --boot2 disk \
-  --vram 16 \
+  --vram 128 \
   --firmware efi
 
 VBoxManage createhd \
