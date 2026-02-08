@@ -397,6 +397,7 @@
       become: true
 
     - name: Configure PAM base package lockout behaviour
+      # unlock after failed attempts: faillock --user username --reset
       ansible.builtin.copy:
         dest: /etc/security/faillock.conf
         content: |
