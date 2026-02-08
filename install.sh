@@ -130,3 +130,6 @@ arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
 echo "$user:$password" | chpasswd --root /mnt
 echo "$devuser:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
+
+
+TEST123
