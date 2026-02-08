@@ -29,8 +29,6 @@ sway
 
 reflector # update pacman mirrors to latest/fast mirrors
 
-
-
 # sway
 ~/.bashrc
 ```
