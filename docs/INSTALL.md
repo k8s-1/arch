@@ -9,7 +9,7 @@ https://wiki.archlinux.org/title/Installation_guide
 - Prepare boot medium
 - Disable UEFI secure boot
 - Launch iso from usb
-- Connect to WiFi with `iwctl` if needed:
+- Connect to wifi if needed:
 
 iwctl
 [iwd]# device list
