@@ -4,10 +4,6 @@ set -euo pipefail
 
 
 precheck () {
-  # set up logging
-  exec 1> >(tee "stdout.log")
-  exec 2> >(tee "stderr.log")
-
   # ensure correct time during install
   timedatectl set-ntp true
 }
@@ -59,6 +55,8 @@ setvars() {
 
 
 disk() {
+  echo "Partitioning disk..."
+
   # allocate space
   sfdisk "/dev/$device" << EOF
 label: gpt
@@ -87,6 +85,8 @@ EOF
 
 
 mounts() {
+  echo "Setting up filesystem..."
+
   # make filesystem
   mkfs.vfat -F32 "${part_boot}"
   mkfs.ext4 /dev/mapper/root
@@ -100,6 +100,8 @@ mounts() {
 
 
 system () {
+  echo "Setting up base system..."
+
   # base packages
   pacstrap -K /mnt base linux linux-firmware networkmanager vim
 
@@ -121,6 +123,8 @@ system () {
 
 
 bootloader() {
+  echo "Setting up bootloader..."
+
   # initramfs
   arch-chroot /mnt sed -i \
     "s|^HOOKS=.*|HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)|" \
@@ -146,6 +150,8 @@ EOF
 
 
 swap_encryption () {
+  echo "Setting up disk encryption..."
+
   # ensure swap is turned off
   swapoff "$part_swap"
 
@@ -166,6 +172,8 @@ EOF
 
 
 users () {
+  echo "Setting up user accounts..."
+
   devuser="dev"
   arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,video,audio,storage "$user"
   arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
