@@ -47,26 +47,16 @@ while true; do
   [[ "$root_pw" == "$root_pw2" ]] && break
 done
 
-while true; do
-  echo -n "user password: "
-  read -r -s user_pw
-  echo
-done
+echo -n "user password: "
+read -r -s user_pw
+echo
 
-while true; do
-  echo -n "dev password: "
-  read -r -s dev_pw
-  echo
-done
+echo -n "dev password: "
+read -r -s dev_pw
+echo
 
-while true; do
-  read -r -p "username: " user
-  echo
-  read -r -p "username (repeat): " user2
-  echo
-
-  [[ "$user" == "$user2" ]] && break
-done
+read -r -p "username: " user
+echo
 
 # If device ends with a digit, add "p" before partition number
 suffix=""
