@@ -27,17 +27,6 @@ username ALL=(ALL) NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, 
 
 
 
-
-# ufw
-ufw default deny incoming
-ufw default deny routed
-ufw default allow outgoing
-ufw status verbose
-systemctl enable ufw
-systemctl start ufw
-
-
-
 # dns
 ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 resolvectl status
