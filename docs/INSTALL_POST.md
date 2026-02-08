@@ -1,29 +1,3 @@
-# Encrypted swap
-swapoff /dev/sda2
-mkfs.ext2 -L cryptswap /dev/sda2 1M
-
-vim /etc/crypttab -> uncomment + adjust swap line
-
-/etc/crypttab
-```
-# <name> <device>         <password>    <options>
-swap      LABEL=cryptswap    /dev/urandom   swap,cipher=aes-xts-plain64,size=512,sector-size=4096
-```
-
-/etc/fstab
-```
-# <filesystem>    <dir>  <type>  <options>  <dump>  <pass>
-/dev/mapper/swap  none   swap    defaults   0       0
-```
-
-disable sleep/hibernate:
-/etc/systemd/sleep.conf.d/disable-sleep.conf
-[Sleep]
-AllowSuspend=no
-AllowHibernation=no
-AllowHybridSleep=no
-AllowSuspendThenHibernate=no
-
 # Bootloader automatic update
 /etc/pacman.d/hooks/95-systemd-boot.hook
 ```
