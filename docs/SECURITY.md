@@ -257,40 +257,6 @@ exec swayidle -w \
 		resume 'swaymsg "output * power on"'
 
 
-
-
-# pam allow only certain users to login with su https://wiki.archlinux.org/title/Security#Allow_only_certain_users
-Uncomment the appropriate line in /etc/pam.d/su and /etc/pam.d/su-l
-```
-auth required pam_wheel.so use_uid
-```
-
-
-
-
-# pam limits.conf
-/etc/security/limits.conf
-```
-*           soft    priority   0           # Set the default priority to neutral niceness.
-
-*           hard    nproc      4096        # Prevent fork-bombs from taking out the system.
-root        hard    nproc      65536       # Prevent root from not being able to launch enough processes
-
-
-*           hard    nofile     65535
-*           soft    nofile      8192
-
-
-*           soft    core       0           # Prevent corefiles from being generated.
-*           hard    core       0
-
-*           hard    nice       -19         # Prevent non-root users from running a process at minimal niceness.
-root        hard    nice       -20         # Allows root to run a process at minimal niceness to fix the system when unresponsive.
-
-```
-
-
-
 # harden kernel (safe params only)
 /etc/sysctl.d/99-hardening.conf:
 ```

@@ -301,6 +301,20 @@
 
           # disables obsolete vsyscalls
           vsyscall=none
+
+          # Protect kernel pointers from unprivileged users
+          kernel.kptr_restrict = 1
+
+          # Restrict ptrace to own processes (prevents process snooping)
+          kernel.yama.ptrace_scope = 1
+
+          # Filesystem
+          fs.suid_dumpable = 0
+          fs.protected_hardlinks = 1
+          fs.protected_symlinks = 1
+          fs.protected_fifos = 2
+          fs.protected_regular = 2
+
         state: present
         create: true
         mode: "0600"
@@ -410,6 +424,24 @@
         group: root
         mode: '0640'
       become: true
+
+    - name: Configure PAM limits (dev-friendly)
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/security/limits.d/99-dev.conf
+        owner: root
+        group: root
+        mode: '0640'
+        content: |
+          *           soft    priority   0            # Neutral niceness
+          *           hard    nproc      4096         # Prevent fork-bombs
+          root        hard    nproc      65536        # Allow root to spawn many processes
+          *           hard    nofile     65535        # Open file descriptors limit
+          *           soft    nofile     8192         # Open file descriptors (soft limit)
+          *           soft    core       0            # Disable core dumps
+          *           hard    core       0
+          *           hard    nice       -19          # Prevent non-root users from low priority processes
+          root        hard    nice       -20          # Root can run at minimal niceness
 
   handlers:
     - name: Setup ntp
