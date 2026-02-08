@@ -21,7 +21,7 @@ read -r hostname
 : "${hostname:?}"
 
 lsblk
-echo -n "device to partition (WARNING: loses all data!): "
+echo -n "device NAME to partition .e.g. sda (WARNING: loses all data!): "
 read -r device
 : "${device:?}"
 
@@ -37,8 +37,10 @@ done
 while true; do
   echo -n "root password: "
   read -r -s root_pw
+  echo
   echo -n "root password (repeat): "
   read -r -s root_pw2
+  echo
 
   [[ "$root_pw" == "$root_pw2" ]] && break
 done
@@ -46,8 +48,10 @@ done
 while true; do
   echo -n "user password: "
   read -r -s user_pw
+  echo
   echo -n "user password (repeat): "
   read -r -s user_pw2
+  echo
 
   [[ "$user_pw" == "$user_pw2" ]] && break
 done
@@ -55,15 +59,19 @@ done
 while true; do
   echo -n "dev password: "
   read -r -s dev_pw
+  echo
   echo -n "dev password (repeat): "
   read -r -s dev_pw2
+  echo
 
   [[ "$dev_pw" == "$dev_pw2" ]] && break
 done
 
 while true; do
   read -r -p "username: " user
+  echo
   read -r -p "username (repeat): " user2
+  echo
 
   [[ "$user" == "$user2" ]] && break
 done
@@ -73,9 +81,9 @@ suffix=""
 if [[ "$device" =~ [0-9]$ ]]; then
     suffix="p"
 fi
-part_boot="${device}${suffix}1"
-part_swap="${device}${suffix}2"
-part_root="${device}${suffix}3"
+part_boot="/dev/${device}${suffix}1"
+part_swap="/dev/${device}${suffix}2"
+part_root="/dev/${device}${suffix}3"
 
 
 
@@ -98,8 +106,8 @@ wipefs -a "$part_boot"
 wipefs -a "$part_swap"
 wipefs -a "$part_root"
 
-printf '%s' "$luks_pw" | cryptsetup luksFormat "/dev/$part_root" --batch-mode -
-printf '%s' "$luks_pw" | cryptsetup open "/dev/$part_root" root --batch-mode -
+printf '%s' "$luks_pw" | cryptsetup luksFormat "$part_root" --batch-mode -
+printf '%s' "$luks_pw" | cryptsetup open "$part_root" root --batch-mode -
 
 
 # --- CONFIGURE FS + MOUNTS
