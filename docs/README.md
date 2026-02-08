@@ -18,8 +18,6 @@ iwctl
 [iwd]# station name connect SSID
 
 # Recovery
-If you are locked out and need to recover:
-
 - boot from live usb
 ```
 cryptsetup luksOpen /dev/sdXn root
