@@ -5,10 +5,6 @@ set -euo pipefail
 
 # --- PRE-CHECK
 
-echo "NOT SAFE"
-echo -n "Proceed? This process wipes all your data: "
-read -r
-
 # Set up logging
 exec 1> >(tee "stdout.log")
 exec 2> >(tee "stderr.log")
@@ -20,37 +16,47 @@ timedatectl set-ntp true
 
 # --- SET VARS
 
-read -r hostname -p "hostname: "
+echo -n "hostname: "
+read -r hostname
 : "${hostname:?}"
 
 lsblk
-read -r device -p "device to partition: "
+echo -n "device to partition (WARNING: loses all data!): "
+read -r device
 : "${device:?}"
 
 while true; do
-  read -r -s -p "LUKS encryption password: " luks_pw
-  read -r -s -p "LUKS encryption password (repeat): " luks_pw2
+  echo -n "LUKS encryption password: "
+  read -r -s luks_pw
+  echo -n "LUKS encryption password (repeat): "
+  read -r -s luks_pw2
 
   [[ "$luks_pw" == "$luks_pw2" ]] && break
 done
 
 while true; do
-  read -r -s -p "root password: " root_pw
-  read -r -s -p "root password (repeat): " root_pw2
+  echo -n "root password: "
+  read -r -s root_pw
+  echo -n "root password (repeat): "
+  read -r -s root_pw2
 
   [[ "$root_pw" == "$root_pw2" ]] && break
 done
 
 while true; do
-  read -r -s -p "user password: " user_pw
-  read -r -s -p "user password (repeat): " user_pw2
+  echo -n "user password: "
+  read -r -s user_pw
+  echo -n "user password (repeat): "
+  read -r -s user_pw2
 
   [[ "$user_pw" == "$user_pw2" ]] && break
 done
 
 while true; do
-  read -r -s -p "dev password: " dev_pw
-  read -r -s -p "dev password (repeat): " dev_pw2
+  echo -n "dev password: "
+  read -r -s dev_pw
+  echo -n "dev password (repeat): "
+  read -r -s dev_pw2
 
   [[ "$dev_pw" == "$dev_pw2" ]] && break
 done
