@@ -41,7 +41,6 @@ DNSSEC=yes
 Cache=yes
 ```
 
-
 # usbguard blocks malicious HID
 https://wiki.archlinux.org/title/USBGuard
 ```
