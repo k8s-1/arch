@@ -396,6 +396,20 @@
         mode: '0640'
       become: true
 
+    - name: Configure PAM base package lockout behaviour
+      ansible.builtin.copy:
+        dest: /etc/security/faillock.conf
+        content: |
+          deny=4                  # limited tries
+          unlock_time=3600        # 1h lock
+          even_deny_root=true     # root is already locked with passwd --lock root, extra measure
+          fail_interval=900       # only count failures within 15 min
+          dir=/var/lib/faillock   # persist reboots
+        owner: root
+        group: root
+        mode: '0640'
+      become: true
+
   handlers:
     - name: Setup ntp
       ansible.builtin.command: timedatectl set-ntp true
