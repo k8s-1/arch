@@ -167,7 +167,6 @@ users () {
   echo "Setting up user accounts..."
 
   arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,video,audio,storage "$user"
-  arch-chroot /mnt useradd -mU -s /usr/bin/bash -G video,audio,storage "$devuser"
 
   echo "$user:$user_pw" | chpasswd --root /mnt
   echo "root:$root_pw" | chpasswd --root /mnt
