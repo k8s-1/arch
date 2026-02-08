@@ -17,6 +17,12 @@ iwctl
 [iwd]# station name get-networks
 [iwd]# station name connect SSID
 
+# Install
+```
+install.sh | tee log
+reboot
+```
+
 # Recovery
 - boot from live usb
 ```
