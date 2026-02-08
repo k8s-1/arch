@@ -158,15 +158,12 @@ swap_encryption () {
   mkfs.ext2 -L cryptswap "$part_swap" 1M
 
   # add labelled disk to crypttab
-  cat <<EOF> /etc/crypttab
-# <name> <device>         <password>    <options>
-swap     LABEL=cryptswap  /dev/urandom  swap,offset=2048,cipher=aes-xts-plain64,size=512,sector-size=4096
+  cat <<EOF>> /mnt/etc/crypttab
+swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,size=512
 EOF
 
   # add virtual swap disk to fstab
-  fstab_file="/mnt/etc/fstab"
-  swap_line="/dev/mapper/swap  none   swap    defaults   0       0"
-  echo "$swap_line" >> "$fstab_file"
+  echo "/dev/mapper/swap none swap defaults 0 0" > /mnt/etc/fstab
 }
 
 
@@ -192,6 +189,8 @@ main () {
   bootloader
   swap_encryption
   users
+
+  echo "Setup complete... please reboot."
 }
 
 main "$@"
