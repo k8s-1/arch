@@ -250,7 +250,7 @@
     # KERNEL SECURITY
     - name: Harden kernel
       ansible.builtin.blockinfile:
-        path: /etc/sysctl.conf
+        path: /etc/sysctl.d/99-hardening.conf
         marker: "# {mark} ANSIBLE MANAGED BLOCK"
         block: |
           # protect against SYN flood attacks
