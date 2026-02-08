@@ -13,21 +13,40 @@ read -r
 exec 1> >(tee "stdout.log")
 exec 2> >(tee "stderr.log")
 
-
-
-# --- FETCH VARS
-
 # Ensure correct time during install
 timedatectl set-ntp true
 
-echo -n "hostname: "
-read -r hostname
-: "${hostname:?"missing hostname"}"
+
+
+# --- SET VARS
+
+read -r hostname -p "hostname: "
+: "${hostname:?}"
 
 lsblk
-echo -n "device to partition: "
-read -r device
-: "${device:?"missing device"}"
+read -r device -p "device to partition: "
+: "${device:?}"
+
+while true; do
+  read -r -s -p "LUKS encryption password: " luks_pw
+  read -r -s -p "LUKS encryption password (repeat): " luks_pw2
+
+  [[ "$luks_pw" == "$luks_pw2" ]] && break
+done
+
+while true; do
+  read -r -s -p "root password: " root_pw
+  read -r -s -p "root password (repeat): " root_pw2
+
+  [[ "$root_pw" == "$root_pw2" ]] && break
+done
+
+while true; do
+  read -r -s -p "user password: " user_pw
+  read -r -s -p "user password (repeat): " user_pw2
+
+  [[ "$user_pw" == "$user_pw2" ]] && break
+done
 
 # If device ends with a digit, add "p" before partition number
 suffix=""
