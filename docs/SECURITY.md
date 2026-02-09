@@ -315,22 +315,6 @@ SCRIPTWHITELIST=/usr/bin/vendor_perl/GET
 
 
 
-# disable ssh
-Disable the service:
-```
-sudo systemctl stop sshd.service
-sudo systemctl disable sshd.service
-sudo systemctl mask sshd.service
-```
-
-Additionally disable via config:
-/etc/ssh/ssh_config
-```
-DenyUsers *
-PasswordAuthentication no
-PermitRootLogin no
-```
-
 
 
 
