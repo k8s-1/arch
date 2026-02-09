@@ -106,6 +106,7 @@
       community.general.pacman:
         name:
           - sway
+          - swayidle
           - swaybg
           - foot
           - polkit
