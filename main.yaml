@@ -363,6 +363,19 @@
         # TODO: secure docker
         # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
 
+        - name: Ensure group docker exists
+          ansible.builtin.group:
+            name: docker
+            state: present
+
+        - name: Add user to virtualization groups
+          ansible.builtin.user:
+            name: "{{ username }}"
+            groups: docker
+            append: true
+          become: true
+          notify: Restart docker service
+
 
 
     # CONFIGURE AUDIT TOOLS
