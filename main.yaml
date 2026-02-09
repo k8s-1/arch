@@ -63,19 +63,6 @@
 
 
 
-    # HOSTNAME
-    - name: Set hostname
-      ansible.builtin.lineinfile:
-        path: /etc/hostname
-        line: device01
-        state: present
-        create: true
-      become: true
-
-
-
-
-
     # FIREWALL
     - name: Install firewall
       community.general.pacman:
