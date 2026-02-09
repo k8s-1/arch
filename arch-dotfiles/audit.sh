@@ -19,3 +19,7 @@ rkhunter --config-check
 
 # other checks [add to maintenance.sh]
 systemctl --failed
+
+
+# check system package integrity [add to maintenance.sh]
+sudo pacman -Qk
