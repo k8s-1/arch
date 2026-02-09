@@ -3,3 +3,5 @@
 sudo lynis audit system
 
 sudo arch-audit
+
+systemd-analzye security
