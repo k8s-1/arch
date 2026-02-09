@@ -111,6 +111,7 @@
           - polkit
           - fuzzel
           - wl-clipboard
+          - xdg-desktop-portal-wlr # for screen sharing
         state: present
       become: true
 
