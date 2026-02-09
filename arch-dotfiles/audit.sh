@@ -15,3 +15,7 @@ rkhunter --propupd
 rkhunter --update
 rkhunter --check --sk
 rkhunter --config-check
+
+
+# other checks [add to maintenance.sh]
+systemctl --failed
