@@ -105,13 +105,13 @@
     - name: Install packages for sway
       community.general.pacman:
         name:
+          - polkit
           - sway
           - swayidle
           - swaylock
           - swaybg
           - wmenu
           - foot
-          - polkit
           - fuzzel
           - wl-clipboard
           - xdg-desktop-portal-wlr # for screen sharing
