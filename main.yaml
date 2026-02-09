@@ -28,7 +28,6 @@
 
 
 
-    # -------------------------------------------------------
     # CONFIGURE SERVICES
     - name: Enable network manager service
       ansible.builtin.systemd:
@@ -73,7 +72,6 @@
 
 
 
-    # -------------------------------------------------------
     # FIREWALL
     - name: Install firewall
       community.general.pacman:
@@ -109,9 +107,6 @@
 
 
 
-
-
-    # -------------------------------------------------------
     # SWAY WAYLAND DISPLAY MANAGER
     - name: Install packages for sway
       community.general.pacman:
@@ -131,7 +126,6 @@
 
 
 
-    # -------------------------------------------------------
     # EXTRA PACKAGES
     - name: Install extra convencience packages
       community.general.pacman:
@@ -151,7 +145,6 @@
       become: true
 
 
-    # -------------------------------------------------------
     # CONFIGURE USER ACCESS
     - name: Add user to groups
       ansible.builtin.user:
@@ -202,6 +195,7 @@
       when: "'AuthenticAMD' in lscpu.stdout"
       become: true
       notify: Update GRUB
+
 
 
     # NEOVIM
