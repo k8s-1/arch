@@ -283,15 +283,6 @@ Add this to maintenance script.
 
 
 
-# check system package integrity [add to maintenance.sh]
-sudo pacman -Qk
-
-
-
-# other checks [add to maintenance.sh]
-systemctl --failed
-
-
 
 
 
