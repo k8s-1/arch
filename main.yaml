@@ -383,6 +383,21 @@
             state: present
           become: true
 
+        - name: Enable Docker rootless service as user unit
+          ansible.builtin.command:
+            cmd: "systemctl --user enable --now docker.service"
+
+        - name: Create Docker rootless context if missing
+          ansible.builtin.command:
+            cmd: >
+              docker context create rootless --description "Rootless mode"
+              --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
+          ignore_errors: true
+
+        - name: Set Docker rootless context as current
+          ansible.builtin.command:
+            cmd: "docker context use rootless"
+
 
 
     # CONFIGURE AUDIT TOOLS
