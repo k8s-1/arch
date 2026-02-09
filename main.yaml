@@ -107,6 +107,7 @@
         name:
           - sway
           - swayidle
+          - swaylock
           - swaybg
           - foot
           - polkit
