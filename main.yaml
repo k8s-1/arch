@@ -351,9 +351,6 @@
             state: present
           become: true
 
-        # TODO: secure docker
-        # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
-
         - name: Ensure group docker exists
           ansible.builtin.group:
             name: docker
@@ -366,6 +363,25 @@
             append: true
           become: true
           notify: Restart docker service
+
+        # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
+        - name: Ensure subuid entry exists for rootless user
+          ansible.builtin.lineinfile:
+            path: /etc/subuid
+            line: "{{ ansible_user_id }}:100000:65536"
+            regexp: "^{{ ansible_user_id }}:"
+            create: yes
+            state: present
+          become: true
+
+        - name: Ensure subgid entry exists for rootless user
+          ansible.builtin.lineinfile:
+            path: /etc/subgid
+            line: "{{ ansible_user_id }}:100000:65536"
+            regexp: "^{{ ansible_user_id }}:"
+            create: yes
+            state: present
+          become: true
 
 
 
