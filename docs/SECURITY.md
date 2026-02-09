@@ -434,14 +434,6 @@ write-cache
 
 
 
-# review systemd services (e.g. docker.d)
-systemd-analzye security
-https://wiki.archlinux.org/title/Systemd/Sandboxing
-
-
-
-
-
 # disable root login
 check if you can sudo su, then
 sudo passwd --lock root
