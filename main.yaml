@@ -429,7 +429,7 @@
         mode: '0640'
       become: true
 
-    - name: Configure PAM limits (dev-friendly)
+    - name: Configure PAM limits
       become: true
       ansible.builtin.copy:
         dest: /etc/security/limits.d/99-dev.conf
