@@ -361,19 +361,7 @@
           become: true
 
         # TODO: secure docker
-
-        # - name: Ensure group docker exists
-        #   ansible.builtin.group:
-        #     name: docker
-        #     state: present
-        #
-        # - name: Add user to virtualization groups
-        #   ansible.builtin.user:
-        #     name: "{{ username }}"
-        #     groups: docker
-        #     append: true
-        #   become: true
-        #   notify: Restart docker service
+        # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
 
 
 
