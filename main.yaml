@@ -109,6 +109,7 @@
           - swayidle
           - swaylock
           - swaybg
+          - wmenu
           - foot
           - polkit
           - fuzzel
