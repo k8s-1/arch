@@ -107,7 +107,7 @@ system () {
   genfstab -U /mnt >> /mnt/etc/fstab
 
   # hostname
-  echo "${hostname}" > /mnt/etc/hostname
+  echo "node-$RANDOM" > /mnt/etc/hostname
 
   # time
   arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
