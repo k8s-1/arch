@@ -194,8 +194,8 @@
       community.general.pacman:
         name:
           - ripgrep
-          - nodejs
           - npm
+          - nodejs
           - ttf-meslo-nerd
         state: present
       become: true
