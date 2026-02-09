@@ -241,7 +241,6 @@
           PasswordAuthentication no
           PubkeyAuthentication no
           DenyUsers *
-          Protocol 2
         state: present
         create: false
         mode: "0640"
