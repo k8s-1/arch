@@ -405,7 +405,7 @@
         dest: /etc/systemd/sleep.conf.d/disable-sleep.conf
         content: |
           [Sleep]
-          AllowSuspend=no
+          AllowSuspend=yes
           AllowHibernation=no
           AllowHybridSleep=no
           AllowSuspendThenHibernate=no
