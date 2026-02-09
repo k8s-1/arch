@@ -367,6 +367,7 @@
 
 
         # CONFIGURE ROOTLESS DOCKER
+        # (!) without, user can escalate to host root
         # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
         - name: Ensure subuid entry exists for rootless user
           ansible.builtin.lineinfile:
