@@ -387,7 +387,7 @@
           ansible.builtin.command:
             cmd: "systemctl --user enable --now docker.service"
 
-        - name: Create Docker rootless context if missing
+        - name: Create Docker rootless context
           ansible.builtin.command:
             cmd: >
               docker context create rootless --description "Rootless mode"
