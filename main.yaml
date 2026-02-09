@@ -234,7 +234,7 @@
 
     - name: Disable SSH in config
       ansible.builtin.blockinfile:
-        path: /etc/ssh/sshd_config
+        path: /etc/ssh/ssh_config
         marker: "# {mark} ANSIBLE MANAGED BLOCK"
         block: |
           PermitRootLogin no
