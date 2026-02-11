@@ -249,7 +249,7 @@
       become: true
 
 
-    # KERNEL SECURITY
+    # KERNEL HARDENING
     - name: Harden kernel
       ansible.builtin.blockinfile:
         path: /etc/sysctl.d/99-hardening.conf
@@ -336,70 +336,67 @@
 
 
 
-    - name: Setup k8s development tools
-      block:
-        - name: Install k8s packages
-          pacman:
-            name:
-              - docker
-              - kubectl
-              - helm
-              - minikube
-              - bash-completion
-              - kind
-            state: present
-          become: true
+    # KUBERNETES
+    - name: Install k8s packages
+      pacman:
+        name:
+          - docker
+          - kubectl
+          - helm
+          - minikube
+          - bash-completion
+          - kind
+        state: present
+      become: true
 
-        - name: Ensure group docker exists
-          ansible.builtin.group:
-            name: docker
-            state: present
+    - name: Ensure group docker exists
+      ansible.builtin.group:
+        name: docker
+        state: present
 
-        - name: Add user to docker group
-          ansible.builtin.user:
-            name: "{{ ansible_user_id }}"
-            groups: docker
-            append: true
-          become: true
-          notify: Restart docker service
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        groups: docker
+        append: true
+      become: true
+      notify: Restart docker service
 
+    # CONFIGURE ROOTLESS DOCKER
+    # (!) without, user can escalate to host root
+    # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
+    - name: Ensure subuid entry exists for rootless user
+      ansible.builtin.lineinfile:
+        path: /etc/subuid
+        line: "{{ ansible_user_id }}:100000:65536"
+        regexp: "^{{ ansible_user_id }}:"
+        create: yes
+        state: present
+      become: true
 
+    - name: Ensure subgid entry exists for rootless user
+      ansible.builtin.lineinfile:
+        path: /etc/subgid
+        line: "{{ ansible_user_id }}:100000:65536"
+        regexp: "^{{ ansible_user_id }}:"
+        create: yes
+        state: present
+      become: true
 
-        # CONFIGURE ROOTLESS DOCKER
-        # (!) without, user can escalate to host root
-        # https://wiki.archlinux.org/title/Docker#Rootless_Docker_daemon
-        - name: Ensure subuid entry exists for rootless user
-          ansible.builtin.lineinfile:
-            path: /etc/subuid
-            line: "{{ ansible_user_id }}:100000:65536"
-            regexp: "^{{ ansible_user_id }}:"
-            create: yes
-            state: present
-          become: true
+    - name: Enable Docker rootless service as user unit
+      ansible.builtin.command:
+        cmd: "systemctl --user enable --now docker.service"
 
-        - name: Ensure subgid entry exists for rootless user
-          ansible.builtin.lineinfile:
-            path: /etc/subgid
-            line: "{{ ansible_user_id }}:100000:65536"
-            regexp: "^{{ ansible_user_id }}:"
-            create: yes
-            state: present
-          become: true
+    - name: Create Docker rootless context
+      ansible.builtin.command:
+        cmd: >
+          docker context create rootless --description "Rootless mode"
+          --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
+      ignore_errors: true
 
-        - name: Enable Docker rootless service as user unit
-          ansible.builtin.command:
-            cmd: "systemctl --user enable --now docker.service"
-
-        - name: Create Docker rootless context
-          ansible.builtin.command:
-            cmd: >
-              docker context create rootless --description "Rootless mode"
-              --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
-          ignore_errors: true
-
-        - name: Set Docker rootless context as current
-          ansible.builtin.command:
-            cmd: "docker context use rootless"
+    - name: Set Docker rootless context as current
+      ansible.builtin.command:
+        cmd: "docker context use rootless"
 
 
 
@@ -409,6 +406,7 @@
         name:
           - rkhunter
           - lynis
+          - clamav
         state: present
       become: true
 
@@ -480,6 +478,13 @@
           *           hard    core       0
           *           hard    nice       -19          # Prevent non-root users from low priority processes
           root        hard    nice       -20          # Root can run at minimal niceness
+
+    # TODO: audit
+    # TODO: clamav
+    # TODO: apparmor
+    # TODO: usbguard
+    # TODO: arch-specific dotfiles -> dotfiles repo
+    # TODO: dotfiles makefile, dot- prefix
 
   handlers:
     - name: Setup ntp

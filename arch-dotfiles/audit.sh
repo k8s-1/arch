@@ -23,3 +23,8 @@ systemctl --failed
 
 # check system package integrity [add to maintenance.sh]
 sudo pacman -Qk
+
+
+# clamav homedir scan
+freshclam
+find "$HOME" -type f -print0 | xargs -0 -P "$(nproc)" clamscan
