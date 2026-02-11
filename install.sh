@@ -10,9 +10,6 @@ precheck () {
 
 
 setvars() {
-  read -r -p "hostname: " hostname
-  echo
-
   lsblk
   read -r -p "device NAME to partition .e.g. sda (WARNING: loses all data!): " device
   echo
