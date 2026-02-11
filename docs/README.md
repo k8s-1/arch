@@ -23,8 +23,20 @@ iwctl
 
 # Install
 ```
-install.sh | tee log
+wget https://raw.githubusercontent.com/k8s-1/arch/main/install.sh
+chmod +x install.sh
+./install.sh | tee log
 reboot
+
+cd arch
+git clone https://github.com/k8s-1/arch.git
+git remote set-url origin git@github.com:k8s-1/arch.git
+ansible-playbook -K main.yaml
+
+cd
+git clone git@github.com:k8s-1/dotfiles.git
+cd dotfiles
+make arch
 ```
 
 # Recovery
