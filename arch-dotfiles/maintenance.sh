@@ -2,6 +2,15 @@
 
 set -e
 
+# Clean cache directory
+rm -rf ~/.cache/* && sudo rm -rf /tmp/*
+
+# Cleanup docker objects
+docker system prune -af
+
+# Update rust
+rustup update
+
 # Update mirror list
 if [ -z "$(find /etc/pacman.d/mirrorlist -mtime -7)" ]; then
     sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
@@ -26,17 +35,6 @@ else
     echo "No orphaned packages to remove."
 fi
 
-# Clean cache directory
-rm -rf ~/.cache/* && sudo rm -rf /tmp/*
-
-# Cleanup docker objects
-docker system prune -af
-
-# Update rust
-rustup update
-
-
-CHECK="\xE2\x9C\x85"
-echo -e "\n${CHECK} Maintance complete."
-
-
+GREEN='\033[0;32m'
+NC='\033[0m'
+echo -e "${GREEN}[DONE]${NC}"
