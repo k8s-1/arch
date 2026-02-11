@@ -36,7 +36,7 @@ docker system prune -af
 rustup update
 
 
-CHECK="\xE2\x9C\x85"   # ✅
+CHECK="\xE2\x9C\x85"
 echo -e "\n${CHECK} Maintance complete."
 
 
