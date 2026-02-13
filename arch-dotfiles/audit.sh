@@ -2,7 +2,7 @@
 
 sudo lynis audit system
 
-sudo arch-audit
+sudo arch-audit -rcq
 
 sudo systemd-analzye security
 
