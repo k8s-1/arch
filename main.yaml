@@ -37,13 +37,6 @@
         state: started
       become: true
 
-    - name: Disable network manager wait online service
-      ansible.builtin.systemd:
-        name: NetworkManager-wait-online
-        enabled: false
-        state: stopped
-      become: true
-
     - name: Enable tlp power saving
       ansible.builtin.systemd:
         name: tlp
@@ -77,7 +70,7 @@
         direction: in
       become: true
 
-    - name: Deny all incoming traffic
+    - name: Deny all routed traffic
       ufw:
         rule: deny
         direction: routed
