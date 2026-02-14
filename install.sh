@@ -139,7 +139,7 @@ EOF
 title    Arch Linux
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
-options  rd.luks.name=$(blkid -s UUID -o value "$part_root")=root root=/dev/mapper/root
+options  rd.luks.name=$(blkid -s UUID -o value "$part_root")=root root=/dev/mapper/root audit=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf
 EOF
 }
 

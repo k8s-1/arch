@@ -397,12 +397,25 @@
     - name: Install audit packages
       community.general.pacman:
         name:
+          # scanning
           - rkhunter
-          - lynis
           - clamav
+          # system audit
+          - lynis
+          # audit logging
+          - audit
+          # apparmor
+          - apparmor
+          - python-notify2
+          - python-psutil
+          # usb guard
+          - usbguard
+          # vpn
+          - openvpn
         state: present
       become: true
 
+    # ssh
     - name: Disable password SSH login
       ansible.builtin.blockinfile:
         path: /etc/rkhunter.conf
@@ -425,7 +438,8 @@
         group: "root"
       become: true
 
-    - name: Disable system hibernate and allow sleep/suspend
+    # hibernate
+    - name: Disable system hibernate for LUKS encryption compatability
       ansible.builtin.copy:
         dest: /etc/systemd/sleep.conf.d/disable-sleep.conf
         content: |
@@ -439,6 +453,7 @@
         mode: '0640'
       become: true
 
+    # PAM lockout
     - name: Configure PAM base package lockout behaviour
       # unlock after failed attempts: faillock --user username --reset
       ansible.builtin.copy:
@@ -454,6 +469,7 @@
         mode: '0640'
       become: true
 
+    # PAM limits
     - name: Configure PAM limits
       become: true
       ansible.builtin.copy:
@@ -472,10 +488,145 @@
           *           hard    nice       -19          # Prevent non-root users from low priority processes
           root        hard    nice       -20          # Root can run at minimal niceness
 
-    # TODO: audit
-    # TODO: clamav
-    # TODO: apparmor
+    # auditd - https://wiki.archlinux.org/title/Audit_framework
+    - name: Enable auditd service
+      ansible.builtin.systemd:
+        name: auditd
+        enabled: true
+        state: started
+      become: true
+
+    - name: Configure audit rules
+      # add manually first
+      # list:
+      # auditctl -l
+      #
+      # create:
+      # auditctl -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+      #
+      # verify:
+      # augenrules --check
+      # augenrules --load
+      #
+      # search:
+      # ausearch -p 1
+      #
+      # audit:
+      # aureport -n
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/audit/rules.d/mycustom.rules
+        owner: root
+        group: root
+        mode: '0640'
+        content: |
+          # file
+          -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+          -a always,exit -F arch=b64 -F path=/etc/shadow -F perm=rwxa
+          -a always,exit -F arch=b64 -F path=/etc/group -F perm=rwxa
+          -a always,exit -F arch=b64 -F path=/etc/ssh/sshd_config -F perm=rwxa
+          -a always,exit -F arch=b64 -F path=/etc/sudoers -F perm=rwxa
+          -a always,exit -F arch=b64 -F path=/etc/fstab -F perm=rwxa
+
+          # dir
+          -a always,exit -F arch=b64 -F dir=/boot
+          -a always,exit -F arch=b64 -F dir=/etc/apparmor.d
+          -a always,exit -F arch=b64 -F dir=/etc/network
+          -a always,exit -F arch=b64 -F dir=/etc/sudoers.d
+          -a always,exit -F arch=b64 -F dir=/etc/security
+          -a always,exit -F arch=b64 -F dir=/etc/cron.d
+          -a always,exit -F arch=b64 -F dir=/etc/cron.daily
+          -a always,exit -F arch=b64 -F dir=/etc/cron.hourly
+          -a always,exit -F arch=b64 -F dir=/etc/cron.monthly
+          -a always,exit -F arch=b64 -F dir=/etc/cron.weekly
+
+          # exe
+          -a always,exit -F arch=b64 -F exe=/bin/su
+          -a always,exit -F arch=b64 -F exe=/usr/bin/passwd
+          -a always,exit -F arch=b64 -F exe=/usr/sbin/usermod
+          -a always,exit -F arch=b64 -F exe=/usr/sbin/chsh
+          -a always,exit -F arch=b64 -F exe=/usr/sbin/useradd
+          -a always,exit -F arch=b64 -F exe=/usr/bin/sudo
+          -a always,exit -F arch=b64 -F exe=/usr/sbin/sudo
+          -a always,exit -F arch=b64 -F exe=/bin/chmod
+          -a always,exit -F arch=b64 -F exe=/bin/chown
+
+    # allow user to see audit logs
+    - name: Ensure audit group exists
+      group:
+        name: audit
+        state: present
+
+    - name: Add user to audit group
+      ansible.builtin.user:
+        name: "{{ username }}"
+        groups: audit
+        append: true
+      become: true
+
+    - name: Configure audit logging behaviour
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/audit/auditd.conf
+        owner: root
+        group: root
+        mode: '0640'
+        content: |
+          log_group = audit
+
+    # apparmor
+    - name: Install apparmor packages
+      community.general.pacman:
+        name:
+
+        state: present
+      become: true
+
+    - name: Enable apparmor service
+      ansible.builtin.systemd:
+        name: apparmor
+        enabled: true
+        state: started
+      become: true
+
+    - name: Configure audit logging behaviour
+      become: true
+      ansible.builtin.copy:
+        dest: "/home/{{ username }}/.config/autostart/apparmor-notify.desktop"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0640'
+        content: |
+          log_group = audit
+          [Desktop Entry]
+          Type=Application
+          Name=AppArmor Notify
+          Comment=Receive on-screen notifications of AppArmor denials
+          TryExec=aa-notify
+          Exec=aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
+          StartupNotify=false
+          NoDisplay=true
+
+    # TODO
+    # - name: Configure apparmor profiles
+    #   # https://wiki.archlinux.org/title/AppArmor
+    #   # aa-enabled
+    #   # aa-status
+    #   # aa-teardown ---> disables apparmor profiles
+    #   become: true
+    #   ansible.builtin.copy:
+    #     dest: /etc/audit/rules.d/monkey.rules
+    #     owner: root
+    #     group: root
+    #     mode: '0640'
+    #     content: |
+    #       # file
+    #       -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
+
     # TODO: usbguard
+    # https://wiki.archlinux.org/title/USBGuard
+    # /etc/usbguard/rules.conf
+
     # TODO: arch-specific dotfiles -> dotfiles repo
     # TODO: dotfiles makefile, dot- prefix
 
