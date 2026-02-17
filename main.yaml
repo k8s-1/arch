@@ -132,7 +132,7 @@
     # CONFIGURE USER ACCESS
     - name: Add user to groups
       ansible.builtin.user:
-        name: "{{ username }}"
+        name: "{{ ansible_env.USER }}"
         groups: wheel,audio
         append: true
       become: true
@@ -149,13 +149,13 @@
 
     - name: Ensure user directories exist
       file:
-        path: "/home/{{ username }}/{{ item }}"
+        path: "/home/{{ ansible_env.USER }}/{{ item }}"
         state: directory
         mode: "0700"
-        owner: "{{ username }}"
-        group: "{{ username }}"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
       become: true
-      become_user: "{{ username }}"
+      become_user: "{{ ansible_env.USER }}"
       loop:
         - "Downloads"
         - "Documents"
@@ -204,20 +204,20 @@
     # SSH
     - name: Create user .ssh directory
       file:
-        path: "/home/{{ username }}/.ssh"
+        path: "/home/{{ ansible_env.USER }}/.ssh"
         state: directory
         mode: "0700"
-        owner: "{{ username }}"
-        group: "{{ username }}"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
       become: true
-      become_user: "{{ username }}"
+      become_user: "{{ ansible_env.USER }}"
 
     - name: Generate ssh key-pair
       community.crypto.openssh_keypair:
-        path: "/home/{{ username }}/.ssh/id_ed25519"
+        path: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
         type: "ed25519"
       become: true
-      become_user: "{{ username }}"
+      become_user: "{{ ansible_env.USER }}"
 
     - name: Disable SSH service
       ansible.builtin.systemd:
@@ -560,7 +560,7 @@
 
     - name: Add user to audit group
       ansible.builtin.user:
-        name: "{{ username }}"
+        name: "{{ ansible_env.USER }}"
         groups: audit
         append: true
       become: true
@@ -593,9 +593,9 @@
     - name: Configure audit logging behaviour
       become: true
       ansible.builtin.copy:
-        dest: "/home/{{ username }}/.config/autostart/apparmor-notify.desktop"
-        owner: "{{ username }}"
-        group: "{{ username }}"
+        dest: "/home/{{ ansible_env.USER }}/.config/autostart/apparmor-notify.desktop"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
         mode: '0640'
         content: |
           log_group = audit
