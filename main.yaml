@@ -138,12 +138,13 @@
       become: true
 
     - name: Add wheel to sudoers
-      ansible.builtin.lineinfile:
-        path: /etc/sudoers
-        line: "%wheel ALL=(ALL) NOPASSWD: ALL"
-        validate: "visudo -cf %s"
-        state: present
-        regexp: "^%wheel.*NOPASSWD:.*$"
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/wheel
+        content: |
+          %wheel ALL=(ALL:ALL) ALL
+        owner: root
+        group: root
+        mode: '0440'
       become: true
 
     - name: Ensure user directories exist
