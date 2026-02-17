@@ -99,6 +99,7 @@ system () {
 
   # base packages
   pacstrap -K /mnt base linux linux-firmware networkmanager dbus vim ansible-core git sudo
+  arch-chroot /mnt systemctl enable NetworkManager.service
 
   # fstab
   genfstab -U /mnt >> /mnt/etc/fstab
