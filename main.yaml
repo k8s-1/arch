@@ -9,19 +9,19 @@
         name:
           - networkmanager
           - man
-          - reflector
+          - reflector # pacman mirror optimizer
           - curl
           - wget
           - unzip
-          - ntp
+          - ntp # system time
           - htop
+          - fastfetch # show system info
           - vim
           - neovim
-          - neofetch
           - ttf-meslo-nerd
           - ttf-nerd-fonts-symbols
           - openssh
-          - tlp
+          - tlp # battery life optimizer
           - tmux
         state: present
       become: true
@@ -70,12 +70,6 @@
         direction: in
       become: true
 
-    - name: Deny all routed traffic
-      ufw:
-        rule: deny
-        direction: routed
-      become: true
-
     - name: Allow all outgoing traffic
       ufw:
         rule: allow
@@ -117,7 +111,6 @@
           - noto-fonts
           - firejail
           - firefox
-          - arc-gtk-theme
           - papirus-icon-theme
           - base-devel
           - git

@@ -98,7 +98,7 @@ system () {
   echo "Setting up base system..."
 
   # base packages
-  pacstrap -K /mnt base linux linux-firmware networkmanager dbus vim ansible-core git sudo
+  pacstrap -K /mnt base linux linux-firmware networkmanager dbus vim ansible git sudo
   arch-chroot /mnt systemctl enable NetworkManager.service
 
   # fstab
