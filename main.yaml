@@ -165,14 +165,14 @@
         name: intel-ucode
       when: "'GenuineIntel' in lscpu.stdout"
       become: true
-      notify: Update GRUB
+      notify: Generate initramfs
 
     - name: Install microcode package for AMD CPUs
       pacman:
         name: amd-ucode
       when: "'AuthenticAMD' in lscpu.stdout"
       become: true
-      notify: Update GRUB
+      notify: Generate initramfs
 
 
 
@@ -388,7 +388,7 @@
 
 
     # CONFIGURE AUDIT TOOLS
-    - name: Install audit packages
+    - name: Install security packages
       community.general.pacman:
         name:
           # scanning
@@ -568,14 +568,6 @@
         content: |
           log_group = audit
 
-    # apparmor
-    - name: Install apparmor packages
-      community.general.pacman:
-        name:
-
-        state: present
-      become: true
-
     - name: Enable apparmor service
       ansible.builtin.systemd:
         name: apparmor
@@ -634,6 +626,10 @@
         name: systemd-journald
         enabled: true
         state: restarted
+      become: true
+
+    - name: Generate initramfs
+      ansible.builtin.shell: mkinitcpio -P
       become: true
 
 
