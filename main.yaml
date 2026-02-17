@@ -150,6 +150,7 @@
       become: true
       become_user: "{{ ansible_env.USER }}"
       loop:
+        - ".config"
         - "Downloads"
         - "Documents"
 
@@ -433,10 +434,19 @@
         group: "root"
       become: true
 
+
     # hibernate
+    - name: Create hibernate config dir
+      file:
+        path: "/etc/systemd/sleep.conf.d"
+        state: directory
+        mode: "0750"
+        owner: "root"
+        group: "root"
+      become: true
     - name: Disable system hibernate for LUKS encryption compatability
       ansible.builtin.copy:
-        dest: /etc/systemd/sleep.conf.d/disable-sleep.conf
+        dest: /etc/systemd/sleep.conf.d/sleep.conf
         content: |
           [Sleep]
           AllowSuspend=yes
@@ -447,6 +457,7 @@
         group: root
         mode: '0640'
       become: true
+
 
     # PAM lockout
     - name: Configure PAM base package lockout behaviour
@@ -465,6 +476,14 @@
       become: true
 
     # PAM limits
+    - name: Create PAM config dir
+      file:
+        path: "/etc/security/limits.d"
+        state: directory
+        mode: "0750"
+        owner: "root"
+        group: "root"
+      become: true
     - name: Configure PAM limits
       become: true
       ansible.builtin.copy:
@@ -551,6 +570,7 @@
       group:
         name: audit
         state: present
+      become: true
 
     - name: Add user to audit group
       ansible.builtin.user:
@@ -576,6 +596,15 @@
         state: started
       become: true
 
+    - name: Ensure audit logging directory exists
+      file:
+        path: "/home/{{ ansible_env.USER }}/.config/autostart"
+        state: directory
+        mode: "0700"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+      become: true
+      become_user: "{{ ansible_env.USER }}"
     - name: Configure audit logging behaviour
       become: true
       ansible.builtin.copy:
