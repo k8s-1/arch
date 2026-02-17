@@ -332,7 +332,6 @@
           - helm
           - minikube
           - bash-completion
-          - kind
         state: present
       become: true
 
@@ -347,7 +346,7 @@
         groups: docker
         append: true
       become: true
-      notify: Restart docker service
+      notify: Restart docker
 
     # CONFIGURE ROOTLESS DOCKER
     # (!) without, user can escalate to host root
@@ -361,29 +360,31 @@
         state: present
       become: true
 
-    - name: Ensure subgid entry exists for rootless user
-      ansible.builtin.lineinfile:
-        path: /etc/subgid
-        line: "{{ ansible_user_id }}:100000:65536"
-        regexp: "^{{ ansible_user_id }}:"
-        create: yes
-        state: present
-      become: true
 
-    - name: Enable Docker rootless service as user unit
-      ansible.builtin.command:
-        cmd: "systemctl --user enable --now docker.service"
-
-    - name: Create Docker rootless context
-      ansible.builtin.command:
-        cmd: >
-          docker context create rootless --description "Rootless mode"
-          --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
-      ignore_errors: true
-
-    - name: Set Docker rootless context as current
-      ansible.builtin.command:
-        cmd: "docker context use rootless"
+    # TODO: broken logic
+    # - name: Ensure subgid entry exists for rootless user
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/subgid
+    #     line: "{{ ansible_user_id }}:100000:65536"
+    #     regexp: "^{{ ansible_user_id }}:"
+    #     create: yes
+    #     state: present
+    #   become: true
+    #
+    # - name: Enable Docker rootless service as user unit
+    #   ansible.builtin.command:
+    #     cmd: "systemctl --user enable --now docker.service"
+    #
+    # - name: Create Docker rootless context
+    #   ansible.builtin.command:
+    #     cmd: >
+    #       docker context create rootless --description "Rootless mode"
+    #       --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
+    #   ignore_errors: true
+    #
+    # - name: Set Docker rootless context as current
+    #   ansible.builtin.command:
+    #     cmd: "docker context use rootless"
 
 
 
@@ -631,6 +632,14 @@
     - name: Generate initramfs
       ansible.builtin.shell: mkinitcpio -P
       become: true
+
+    - name: Restart docker
+      ansible.builtin.systemd:
+        name: docker
+        enabled: true
+        state: restarted
+      become: true
+
 
 
 
