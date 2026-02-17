@@ -361,16 +361,16 @@
       become: true
 
 
+    - name: Ensure subgid entry exists for rootless user
+      ansible.builtin.lineinfile:
+        path: /etc/subgid
+        line: "{{ ansible_user_id }}:100000:65536"
+        regexp: "^{{ ansible_user_id }}:"
+        create: yes
+        state: present
+      become: true
+
     # TODO: broken logic
-    # - name: Ensure subgid entry exists for rootless user
-    #   ansible.builtin.lineinfile:
-    #     path: /etc/subgid
-    #     line: "{{ ansible_user_id }}:100000:65536"
-    #     regexp: "^{{ ansible_user_id }}:"
-    #     create: yes
-    #     state: present
-    #   become: true
-    #
     # - name: Enable Docker rootless service as user unit
     #   ansible.builtin.command:
     #     cmd: "systemctl --user enable --now docker.service"
