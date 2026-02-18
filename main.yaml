@@ -725,10 +725,10 @@
           # Allow miscellaneous composite devices (many USB-C docks)
           allow with-interface equals { ef:*:* }
 
-          # Explicitly block mass storage (USB sticks)
+          # Block mass storage (USB sticks)
           block with-interface equals { 08:*:* }
 
-          # Default: block anything else
+          # Block all by default
           block
 
     - name: Enable usbguard
