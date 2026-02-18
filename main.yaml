@@ -4,6 +4,10 @@
   gather_facts: true
 
   tasks:
+    - name: Update cache
+      community.general.pacman:
+        update_cache: true
+
     - name: Install packages
       community.general.pacman:
         name:
