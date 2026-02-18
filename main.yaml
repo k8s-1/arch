@@ -392,7 +392,6 @@
           docker context create rootless
           --description "Rootless mode" 
           --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
-      ignore_errors: true
 
     - name: Set Docker rootless context as current
       ansible.builtin.command:
