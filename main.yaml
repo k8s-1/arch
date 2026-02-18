@@ -114,7 +114,6 @@
       community.general.pacman:
         name:
           - noto-fonts
-          - firejail
           - firefox
           - papirus-icon-theme
           - base-devel
