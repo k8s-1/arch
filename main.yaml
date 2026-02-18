@@ -655,25 +655,28 @@
         group: "root"
         mode: '0640'
         content: |
-          # Allow input devices (keyboard/mouse)
+          # Allow input devices (keyboard, mouse)
           allow with-interface equals { 03:*:* }
 
-          # Allow USB hubs (needed for docks)
+          # Allow USB hubs (critical for docks)
           allow with-interface equals { 09:*:* }
 
-          # Allow video devices (webcams, display adapters)
-          allow with-interface equals { 0e:*:* }
-
-          # Allow communication devices (some docks)
+          # Allow communication devices (USB ethernet adapters)
           allow with-interface equals { 02:*:* }
 
-          # Allow composite/misc devices (many docks use this)
+          # Allow audio devices (dock sound cards)
+          allow with-interface equals { 01:*:* }
+
+          # Allow video devices (webcams / display adapters)
+          allow with-interface equals { 0e:*:* }
+
+          # Allow miscellaneous composite devices (many USB-C docks)
           allow with-interface equals { ef:*:* }
 
-          # Explicitly block USB mass storage
+          # Explicitly block mass storage (USB sticks)
           block with-interface equals { 08:*:* }
 
-          # Block everything else by default
+          # Default: block anything else
           block
 
     - name: Enable usbguard
