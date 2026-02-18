@@ -28,6 +28,7 @@
           - openssh
           - tlp # battery life optimizer
           - tmux
+          - yay # AUR
         state: present
       become: true
 
@@ -374,11 +375,6 @@
         create: yes
         state: present
       become: true
-
-    - name: Ensure yay is installed
-      pacman:
-        name: yay
-        state: present
 
     # TODO: broken logic
     # - name: Enable Docker rootless service as user unit
