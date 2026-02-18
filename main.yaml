@@ -632,7 +632,6 @@
     #   # https://wiki.archlinux.org/title/AppArmor
     #   # aa-enabled
     #   # aa-status
-    #   # sudo journalctl | grep apparmor
     #   # aa-teardown ---> disables apparmor profiles
     #   sshd (SSH Daemon)
     #
@@ -640,6 +639,7 @@
     #   sudo aa-genprof [application-name]
     #   -> customize the profile, clean up
     #   sudo aa-complain /etc/apparmor.d/usr.bin.firefox
+    #   sudo journalctl | grep apparmor
     #   sudo aa-enforce /etc/apparmor.d/usr.bin.[application-name]
 # SYSTEMD SERVICES
 # apache2 (Web Server)
