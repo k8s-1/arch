@@ -365,8 +365,6 @@
         create: yes
         state: present
       become: true
-
-
     - name: Ensure subgid entry exists for rootless user
       ansible.builtin.lineinfile:
         path: /etc/subgid
