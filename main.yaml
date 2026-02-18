@@ -594,14 +594,7 @@
         content: |
           log_group = audit
 
-    - name: Enable apparmor service
-      ansible.builtin.systemd:
-        name: apparmor
-        enabled: true
-        state: started
-      become: true
-
-    - name: Ensure audit logging directory exists
+    - name: Ensure apparmor notify config dir exists
       file:
         path: "/home/{{ ansible_env.USER }}/.config/autostart"
         state: directory
@@ -610,7 +603,7 @@
         group: "{{ ansible_env.USER }}"
       become: true
       become_user: "{{ ansible_env.USER }}"
-    - name: Configure audit logging behaviour
+    - name: Configure apparmor notify
       become: true
       ansible.builtin.copy:
         dest: "/home/{{ ansible_env.USER }}/.config/autostart/apparmor-notify.desktop"
@@ -618,7 +611,6 @@
         group: "{{ ansible_env.USER }}"
         mode: '0640'
         content: |
-          log_group = audit
           [Desktop Entry]
           Type=Application
           Name=AppArmor Notify
@@ -627,6 +619,13 @@
           Exec=aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
           StartupNotify=false
           NoDisplay=true
+
+    - name: Enable apparmor service
+      ansible.builtin.systemd:
+        name: apparmor
+        enabled: true
+        state: started
+      become: true
 
     # TODO
     # - name: Configure apparmor profiles
