@@ -728,7 +728,7 @@
           # Block mass storage (USB sticks)
           block with-interface equals { 08:*:* }
 
-          # Block all by default
+          # Block by default
           block
 
     - name: Enable usbguard
