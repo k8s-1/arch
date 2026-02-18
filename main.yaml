@@ -127,6 +127,37 @@
       become: true
 
 
+    # CONFIGURE AUR
+    #
+    # Check if paru is already installed
+    - name: Check if paru is installed
+      stat:
+        path: /usr/bin/paru
+      register: paru_installed
+
+    - name: Clone paru AUR repository
+      git:
+        repo: https://aur.archlinux.org/paru.git
+        dest: /tmp/paru
+        clone: yes
+        update: yes
+      when: not paru_installed.stat.exists
+
+    - name: Build and install paru using makepkg
+      shell: |
+        cd /tmp/paru
+        makepkg -si --noconfirm
+      args:
+        creates: /usr/bin/paru
+      when: not paru_installed.stat.exists
+
+    - name: Clean up paru source directory
+      file:
+        path: /tmp/paru
+        state: absent
+      when: not paru_installed.stat.exists
+
+
     # CONFIGURE USER ACCESS
     - name: Add user to groups
       ansible.builtin.user:
