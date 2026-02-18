@@ -643,9 +643,46 @@
     #       # file
     #       -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
 
-    # TODO: usbguard
+
+
+    # USB GUARD
     # https://wiki.archlinux.org/title/USBGuard
-    # /etc/usbguard/rules.conf
+    - name: Configure usbguard
+      become: true
+      ansible.builtin.copy:
+        dest: "/etc/usbguard/rules.conf"
+        owner: "root"
+        group: "root"
+        mode: '0640'
+        content: |
+          # Allow input devices (keyboard/mouse)
+          allow with-interface equals { 03:*:* }
+
+          # Allow USB hubs (needed for docks)
+          allow with-interface equals { 09:*:* }
+
+          # Allow video devices (webcams, display adapters)
+          allow with-interface equals { 0e:*:* }
+
+          # Allow communication devices (some docks)
+          allow with-interface equals { 02:*:* }
+
+          # Allow composite/misc devices (many docks use this)
+          allow with-interface equals { ef:*:* }
+
+          # Explicitly block USB mass storage
+          block with-interface equals { 08:*:* }
+
+          # Block everything else by default
+          block
+
+    - name: Enable usbguard
+      become: true
+      ansible.builtin.systemd:
+        name: usbguard
+        enabled: true
+        state: started
+
 
     # TODO: arch-specific dotfiles -> dotfiles repo
     # TODO: dotfiles makefile, dot- prefix
