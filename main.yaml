@@ -603,7 +603,7 @@
         group: "{{ ansible_env.USER }}"
       become: true
       become_user: "{{ ansible_env.USER }}"
-    - name: Configure apparmor notify
+    - name: Configure apparmor desktop notify
       become: true
       ansible.builtin.copy:
         dest: "/home/{{ ansible_env.USER }}/.config/autostart/apparmor-notify.desktop"
