@@ -632,6 +632,7 @@
     #   # https://wiki.archlinux.org/title/AppArmor
     #   # aa-enabled
     #   # aa-status
+    #   # sudo journalctl | grep apparmor
     #   # aa-teardown ---> disables apparmor profiles
     #   sshd (SSH Daemon)
     #
