@@ -633,16 +633,6 @@
     #   # aa-enabled
     #   # aa-status
     #   # aa-teardown ---> disables apparmor profiles
-    #   become: true
-    #   ansible.builtin.copy:
-    #     dest:
-    #     owner: root
-    #     group: root
-    #     mode: '0640'
-    #     content: |
-    #       # file
-    #       -a always,exit -F arch=b64 -F path=/etc/passwd -F perm=rwxa
-
 
 
     # USB GUARD
