@@ -4,9 +4,10 @@
   gather_facts: true
 
   tasks:
-    - name: Update cache
+    - name: Full system upgrade
       community.general.pacman:
         update_cache: true
+        upgrade: true
 
     - name: Install packages
       community.general.pacman:
