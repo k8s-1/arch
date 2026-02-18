@@ -28,7 +28,6 @@
           - openssh
           - tlp # battery life optimizer
           - tmux
-          - yay # AUR
         state: present
       become: true
 

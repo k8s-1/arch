@@ -17,7 +17,7 @@ if [ -z "$(find /etc/pacman.d/mirrorlist -mtime -7)" ]; then
 fi
 
 # Update system and refresh keys if needed
-if sudo pacman -Syu --noconfirm; then
+if paru -Syu --noconfirm; then
     :
 else
     sudo pacman-key --refresh-keys
