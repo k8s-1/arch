@@ -639,6 +639,7 @@
     #   use audit logs to autogenerate:
     #   sudo aa-genprof [application-name]
     #   -> customize the profile, clean up
+    #   sudo aa-complain /etc/apparmor.d/usr.bin.firefox
     #   sudo aa-enforce /etc/apparmor.d/usr.bin.[application-name]
 # SYSTEMD SERVICES
 # apache2 (Web Server)
