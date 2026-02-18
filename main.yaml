@@ -393,7 +393,7 @@
           --description "Rootless mode" 
           --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
 
-    - name: Set Docker rootless context as current
+    - name: Set rootless context
       ansible.builtin.command:
         cmd: "docker context use rootless"
 
