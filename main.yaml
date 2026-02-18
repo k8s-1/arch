@@ -407,7 +407,7 @@
       become: true
 
     - name: Install docker-rootless using yay
-      command: yay -S --noconfirm docker-rootless-extras
+      command: paru -S --noconfirm docker-rootless-extras
       become: true
       environment:
         LANG: "en_US.UTF-8"
