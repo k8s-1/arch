@@ -634,6 +634,10 @@
     #   # aa-status
     #   # aa-teardown ---> disables apparmor profiles
     #   sshd (SSH Daemon)
+    #
+    #   use audit logs to autogenerate:
+    #   sudo aa-genprof [application-name]
+    #   sudo aa-enforce /etc/apparmor.d/usr.bin.[application-name]
 # SYSTEMD SERVICES
 # apache2 (Web Server)
 # nginx (Web Server)
