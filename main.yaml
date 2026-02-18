@@ -647,6 +647,11 @@
 
     # USB GUARD
     # https://wiki.archlinux.org/title/USBGuard
+    # to allow temp access:
+    # sudo systemctl stop usbguard
+    # or
+    # sudo usbguard list-devices
+    # sudo usbguard allow-device 123 --temporary
     - name: Configure usbguard
       become: true
       ansible.builtin.copy:
