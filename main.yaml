@@ -375,6 +375,11 @@
         state: present
       become: true
 
+    - name: Ensure yay is installed
+      pacman:
+        name: yay
+        state: present
+
     # TODO: broken logic
     # - name: Enable Docker rootless service as user unit
     #   ansible.builtin.command:
