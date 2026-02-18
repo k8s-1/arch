@@ -636,7 +636,7 @@
     #   # aa-teardown ---> disables apparmor profiles
     #   become: true
     #   ansible.builtin.copy:
-    #     dest: /etc/audit/rules.d/monkey.rules
+    #     dest:
     #     owner: root
     #     group: root
     #     mode: '0640'
