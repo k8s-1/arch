@@ -633,7 +633,57 @@
     #   # aa-enabled
     #   # aa-status
     #   # aa-teardown ---> disables apparmor profiles
-
+    #   sshd (SSH Daemon)
+# SYSTEMD SERVICES
+# apache2 (Web Server)
+# nginx (Web Server)
+# mysql (Database Server)
+# postgresql (Database Server)
+# docker (Container Runtime)
+# crond (Cron Scheduler)
+# systemd-resolved (DNS Resolver)
+# systemd-timesyncd (Time Synchronization)
+# cupsd (Printing Service)
+# networkd (Networking)
+# lightdm (Display Manager, if using)
+# ssh-agent (SSH Agent)
+# firewalld (Firewall Service)
+#
+# OTHER APPS
+# Firefox
+# Chromium
+# Brave
+# Thunderbird
+# Slack
+# Discord
+# Apache
+# Nginx
+# MySQL
+# PostgreSQL
+# sshd (SSH daemon)
+# Docker
+# VirtualBox
+# QEMU
+# Transmission (torrent client)
+# Nextcloud Client
+# Dropbox
+# Nautilus (File Manager)
+# Thunar (File Manager)
+# Gedit (Text Editor)
+# Vim (Text Editor)
+# Bash (Shell)
+# Zsh (Shell)
+# cups (Printing Service)
+# systemd (System Services)
+# Cron (Scheduled Tasks)
+# Mailman (Mailing List Manager)
+# Telegram Desktop
+#
+# You would not need a profile for all systemd services by default, just the ones that:
+# Handle remote access (e.g., sshd, docker)
+# Handle sensitive data (e.g., mysql, postgresql)
+# Interact with the network (e.g., systemd-resolved, networkd)
+# Provide user-facing functionality (e.g., lightdm, cupsd)
 
     # USB GUARD
     # https://wiki.archlinux.org/title/USBGuard
