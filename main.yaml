@@ -376,21 +376,26 @@
         state: present
       become: true
 
-    # TODO: broken logic
-    # - name: Enable Docker rootless service as user unit
-    #   ansible.builtin.command:
-    #     cmd: "systemctl --user enable --now docker.service"
-    #
-    # - name: Create Docker rootless context
-    #   ansible.builtin.command:
-    #     cmd: >
-    #       docker context create rootless --description "Rootless mode"
-    #       --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
-    #   ignore_errors: true
-    #
-    # - name: Set Docker rootless context as current
-    #   ansible.builtin.command:
-    #     cmd: "docker context use rootless"
+    - name: Install docker-rootless using yay
+      command: yay -S --noconfirm docker-rootless-extras
+      become: true
+      environment:
+        LANG: "en_US.UTF-8"
+
+    - name: Enable Docker rootless service as user unit
+      ansible.builtin.command:
+        cmd: "systemctl --user enable docker.service"
+
+    - name: Create Docker rootless context
+      ansible.builtin.command:
+        cmd: >
+          docker context create rootless --description "Rootless mode" 
+          --docker "host=unix:///run/user/{{ lookup('ansible.builtin.env','UID') }}/docker.sock"
+      ignore_errors: true
+
+    - name: Set Docker rootless context as current
+      ansible.builtin.command:
+        cmd: "docker context use rootless"
 
 
 
