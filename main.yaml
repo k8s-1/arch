@@ -397,6 +397,9 @@
       ansible.builtin.command:
         cmd: "docker context use rootless"
 
+    - name: Enable user lingering for docker to start Docker user unit at boot time
+      command: loginctl enable-linger {{ ansible_user }}
+
 
 
     # CONFIGURE AUDIT TOOLS
